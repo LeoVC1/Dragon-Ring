@@ -60,6 +60,5 @@ public class GunsSetup : MonoBehaviour
         gunValue = whichGun;
         Destroy(PhotonView.Find(viewId).gameObject.GetComponentInChildren<GunsSetup>().myGun);
         myGun = Instantiate(allGuns[whichGun], transform.position, transform.rotation, transform);
-        avatarCombat.AssignGun();
     }
 }

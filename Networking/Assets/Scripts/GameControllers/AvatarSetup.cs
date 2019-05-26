@@ -38,7 +38,7 @@ public class AvatarSetup : MonoBehaviour
     void AddCharacter(int whichCharacter, string myNick)
     {
         characterValue = whichCharacter;
-        myCharacter = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Characters", "Bss"), transform.position - new Vector3(0, 0.5f, 0), transform.rotation);
+        myCharacter = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Characters", "WarriorPrefab"), transform.position - new Vector3(0, 0.5f, 0), transform.rotation);
         myCharacter.transform.parent = transform;
         animator = myCharacter.GetComponent<Animator>();
         //myCharacter.GetComponentInChildren<TextMeshPro>().text = myNick;

@@ -7,12 +7,13 @@ public class PlayerMovement : MonoBehaviour
 {
 
     PhotonView PV;
-    public float movementSpeed = 2;
+    public float maxSpeed = 2;
+    public float runSpeed = 1;
     public float rotationSpeed = 50;
-    Animator anim;
-    GunShop shop;
+    bool isRunning = false;
 
     private AvatarSetup avatarSetup;
+    private bool isAttacking;
 
     void Start()
     {
@@ -26,56 +27,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (PV.IsMine && ShopController.SC.isShopping == false)
         {
-            anim = GetComponentInChildren<Animator>();
-            BasicMovement();
-            BasicRotation();
+            if(isAttacking == false)
+            {
+                BasicMovement();
+                BasicRotation();
+                RunningMovement();
+                Attack();
+            }
         }
     }
 
     void BasicMovement()
     {
-        bool walking = false;
-        if (Input.GetKey(KeyCode.W))
-        {
-            walking = true;
-            transform.position += transform.forward * movementSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            walking = true;
-            transform.position -= transform.forward * movementSpeed * Time.deltaTime;
-        }
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    walking = true;
-        //    transform.position -= transform.right * movementSpeed * Time.deltaTime;
-        //}
-        //if (Input.GetKey(KeyCode.D))
-        //{
-        //    walking = true;
-        //    transform.position += transform.right * movementSpeed * Time.deltaTime;
-        //}
+        float speed = Input.GetAxisRaw("Vertical");
+        transform.position += transform.forward * (maxSpeed * speed * runSpeed) * Time.deltaTime;
 
         float rotation = Input.GetAxisRaw("Horizontal") * Time.deltaTime * rotationSpeed;
         transform.Rotate(new Vector3(0, rotation, 0));
 
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-            walking = false;
-        }
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            //walking = false;
-        }
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            walking = false;
-        }
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            //walking = false;
-        }
-        avatarSetup.animator.SetBool("Walking", walking);
+        avatarSetup.animator.SetFloat("Speed", Mathf.Abs(speed));
     }
 
     void BasicRotation()
@@ -83,6 +53,41 @@ public class PlayerMovement : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * rotationSpeed;
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * rotationSpeed;
         transform.Rotate(new Vector3(0, mouseX, 0));
+    }
+
+    void RunningMovement()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            isRunning = true;
+            runSpeed = 2f;
+        }
+        else
+        {
+            isRunning = false;
+            runSpeed = 1;
+        }
+        avatarSetup.animator.SetBool("Run", isRunning);
+    }
+
+    void Attack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(Random.Range(0,2) == 0)
+                avatarSetup.animator.SetTrigger("Attack1");
+            else
+                avatarSetup.animator.SetTrigger("Attack2");
+            isAttacking = true;
+            Invoke("EndAttack", 1.5f);
+        }
+    }
+
+    public void EndAttack()
+    {
+        avatarSetup.animator.ResetTrigger("Attack1");
+        avatarSetup.animator.ResetTrigger("Attack2");
+        isAttacking = false;
     }
 
 }

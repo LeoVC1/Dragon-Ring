@@ -10,15 +10,10 @@ public class GameSetup : MonoBehaviour
 
     public Transform[] spawnPoints;
 
-    public Text playerHealth;
     public Image playerHealthBar;
 
     public GameObject escButtons;
 
-    public Image reloading;
-    public TextMeshProUGUI bulletsLeft;
-    public TextMeshProUGUI bullets;
-    public GameObject shoppingText;
 
     private void OnEnable()
     {
@@ -30,7 +25,7 @@ public class GameSetup : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && ShopController.SC.isShopping == false)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (escButtons.activeSelf == false)
             {

@@ -43,7 +43,6 @@ public class PlayerRespawn : MonoBehaviour
             guns.myGunInfo.bulletsLeft = 0;
             Destroy(guns.myGunVisible);
             dead = true;
-            avatarCombat.gunState = GunStateMachine.NONE;
             PV.RPC("RPC_Death", RpcTarget.All, PV.ViewID);
             StartCoroutine("Respawn");
         }
