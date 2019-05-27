@@ -27,7 +27,6 @@ public class AvatarSetup : MonoBehaviour
         if (PV.IsMine)
         {
             AddCharacter(0, "");
-            avatarCombat.GetComponent<AvatarCombat>();
             //PV.RPC("RPC_AddCharacter", RpcTarget.AllBuffered, PlayerInfo.PI.mySelectedCharacter, PlayerInfo.PI.myNick);
         }
         else

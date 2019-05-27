@@ -39,25 +39,30 @@ public class AvatarCombat : MonoBehaviour
         healthBarDisplay.fillAmount = avatarSetup.health / 100f;
         if (movementScript.isAttacking && _lock == false)
         {
-            PV.RPC("RPC_WarriorAttack", RpcTarget.All, 20f);
+            rayOrigin = avatarSetup.myCharacter.GetComponent<CharacterScript>().swordLocation;
+            RaycastHit[] hits;
+            Ray ray = new Ray(rayOrigin.position, rayOrigin.TransformDirection(-Vector3.up));
+            Debug.DrawRay(ray.origin, ray.direction, Color.yellow, 0.5f);
+            hits = Physics.RaycastAll(ray, 0.5f);
+            if (hits.Length > 0)
+            {
+                foreach(var hit in hits)
+                {
+                    if (hit.transform.tag == "Player" && hit.collider != GetComponent<CapsuleCollider>())
+                    {
+                        int ID = hit.collider.GetComponent<PhotonView>().ViewID;
+                        PV.RPC("RPC_WarriorAttack", RpcTarget.All, 20f, ID);
+                        Debug.Log(ID);
+                        _lock = true;
+                    }
+                }
+            }
         }
-        rayOrigin = avatarSetup.myCharacter.GetComponent<CharacterScript>().swordLocation;
     }
 
     [PunRPC]
-    void RPC_WarriorAttack(float damage)
+    void RPC_WarriorAttack(float damage, int ID)
     {
-        RaycastHit hit;
-        Ray ray = new Ray(rayOrigin.position, rayOrigin.TransformDirection(-Vector3.up));
-        Debug.DrawRay(ray.origin, ray.direction, Color.yellow, 0.5f);
-        if (Physics.Raycast(ray, out hit, 0.5f))
-        {
-            if (hit.transform.tag == "Player")
-            {
-                Debug.Log(hit.collider.gameObject.name);
-                hit.transform.gameObject.GetComponent<AvatarSetup>().health -= damage;
-                _lock = true;
-            }
-        }
+        PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>().health -= damage;
     }
 }
