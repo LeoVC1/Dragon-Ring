@@ -13,13 +13,17 @@ public class PlayerMovement : MonoBehaviour
     bool isRunning = false;
 
     private AvatarSetup avatarSetup;
-    private bool isAttacking;
+    AvatarCombat avatarCombat;
+    public bool isAttacking;
 
     void Start()
     {
         PV = GetComponent<PhotonView>();
+        if (!PV.IsMine)
+            return;
         Cursor.visible = false;
         avatarSetup = GetComponent<AvatarSetup>();
+        avatarCombat = GetComponent<AvatarCombat>();
     }
 
     
@@ -29,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if(isAttacking == false)
             {
+                RotateToForward();
                 BasicMovement();
                 BasicRotation();
                 RunningMovement();
@@ -39,11 +44,17 @@ public class PlayerMovement : MonoBehaviour
 
     void BasicMovement()
     {
-        float speed = Input.GetAxisRaw("Vertical");
-        transform.position += transform.forward * (maxSpeed * speed * runSpeed) * Time.deltaTime;
+        float ver = Input.GetAxisRaw("Vertical");
+        float hor = Input.GetAxisRaw("Horizontal");
+        float speed = 0;
 
-        float rotation = Input.GetAxisRaw("Horizontal") * Time.deltaTime * rotationSpeed;
-        transform.Rotate(new Vector3(0, rotation, 0));
+        if (ver != 0)
+            speed = ver;
+        else if (hor != 0)
+            speed = hor;
+
+        speed = Mathf.Abs(speed);
+        transform.position += avatarSetup.myCharacter.transform.forward * (maxSpeed * speed * runSpeed) * Time.deltaTime;
 
         avatarSetup.animator.SetFloat("Speed", Mathf.Abs(speed));
     }
@@ -53,6 +64,31 @@ public class PlayerMovement : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * rotationSpeed;
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * rotationSpeed;
         transform.Rotate(new Vector3(0, mouseX, 0));
+    }
+
+    void RotateToForward()
+    {
+        Vector3 originEulerAngles = avatarSetup.myCharacter.transform.eulerAngles;
+
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y + 45;
+        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y - 45;
+        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y + 135;
+        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y + 225;
+        else if (Input.GetKey(KeyCode.W))
+            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y;
+        else if (Input.GetKey(KeyCode.A))
+            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y - 90;
+        else if (Input.GetKey(KeyCode.S))
+            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y + 180;
+        else if (Input.GetKey(KeyCode.D))
+            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y + 90;
+
+        avatarSetup.myCharacter.transform.eulerAngles = originEulerAngles;
+
     }
 
     void RunningMovement()
@@ -83,11 +119,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void EndAttack()
+    void EndAttack()
     {
         avatarSetup.animator.ResetTrigger("Attack1");
         avatarSetup.animator.ResetTrigger("Attack2");
         isAttacking = false;
+        avatarCombat._lock = false;
     }
 
 }

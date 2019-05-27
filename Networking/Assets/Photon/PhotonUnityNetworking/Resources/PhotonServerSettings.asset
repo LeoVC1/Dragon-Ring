@@ -39,5 +39,6 @@ MonoBehaviour:
   - RPC_Death
   - RPC_Respawn
   - RPC_AnimateMovement
+  - RPC_WarriorAttack
   DisableAutoOpenWizard: 1
   ShowSettings: 1

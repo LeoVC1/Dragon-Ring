@@ -9,10 +9,13 @@ public class AvatarCombat : MonoBehaviour
 {
     PhotonView PV;
     AvatarSetup avatarSetup;
+    PlayerMovement movementScript;
 
     public Transform rayOrigin;
 
     public Image healthBarDisplay;
+
+    public bool _lock;
 
     void Start()
     {
@@ -23,6 +26,7 @@ public class AvatarCombat : MonoBehaviour
         }
         healthBarDisplay = GameSetup.GS.playerHealthBar;
         avatarSetup = GetComponent<AvatarSetup>();
+        movementScript = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -33,23 +37,25 @@ public class AvatarCombat : MonoBehaviour
             return;
         }
         healthBarDisplay.fillAmount = avatarSetup.health / 100f;
+        if (movementScript.isAttacking && _lock == false)
+        {
+            PV.RPC("RPC_WarriorAttack", RpcTarget.All, 20f);
+        }
+        rayOrigin = avatarSetup.myCharacter.GetComponent<CharacterScript>().swordLocation;
     }
 
     [PunRPC]
-    void RPC_Shooting(float damage)
+    void RPC_WarriorAttack(float damage)
     {
         RaycastHit hit;
-        if (Physics.Raycast(rayOrigin.position, rayOrigin.TransformDirection(Vector3.forward), out hit, 1000))
+        Ray ray = new Ray(rayOrigin.position, rayOrigin.TransformDirection(-Vector3.up));
+        if (Physics.Raycast(ray, out hit, 0.5f))
         {
-            Debug.DrawRay(rayOrigin.position, rayOrigin.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             if (hit.transform.tag == "Player")
             {
                 hit.transform.gameObject.GetComponent<AvatarSetup>().health -= damage;
+                _lock = true;
             }
-        }
-        else
-        {
-            Debug.DrawRay(rayOrigin.position, rayOrigin.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
         }
     }
 }

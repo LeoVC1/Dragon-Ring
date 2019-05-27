@@ -14,6 +14,8 @@ public class GameSetup : MonoBehaviour
 
     public GameObject escButtons;
 
+    public RawImage minimapImage;
+
 
     private void OnEnable()
     {

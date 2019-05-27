@@ -16,6 +16,7 @@ public class AvatarSetup : MonoBehaviour
 
     public Camera myCamera;
     public AudioListener myAL;
+    public AvatarCombat avatarCombat;
 
     public Animator animator;
 
@@ -26,6 +27,7 @@ public class AvatarSetup : MonoBehaviour
         if (PV.IsMine)
         {
             AddCharacter(0, "");
+            avatarCombat.GetComponent<AvatarCombat>();
             //PV.RPC("RPC_AddCharacter", RpcTarget.AllBuffered, PlayerInfo.PI.mySelectedCharacter, PlayerInfo.PI.myNick);
         }
         else
@@ -41,6 +43,7 @@ public class AvatarSetup : MonoBehaviour
         myCharacter = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Characters", "WarriorPrefab"), transform.position - new Vector3(0, 0.5f, 0), transform.rotation);
         myCharacter.transform.parent = transform;
         animator = myCharacter.GetComponent<Animator>();
+        
         //myCharacter.GetComponentInChildren<TextMeshPro>().text = myNick;
         //Instantiate(PlayerInfo.PI.allCharacters[whichCharacter], transform
     }
