@@ -49,10 +49,12 @@ public class AvatarCombat : MonoBehaviour
     {
         RaycastHit hit;
         Ray ray = new Ray(rayOrigin.position, rayOrigin.TransformDirection(-Vector3.up));
+        Debug.DrawRay(ray.origin, ray.direction, Color.yellow, 0.5f);
         if (Physics.Raycast(ray, out hit, 0.5f))
         {
             if (hit.transform.tag == "Player")
             {
+                Debug.Log(hit.collider.gameObject.name);
                 hit.transform.gameObject.GetComponent<AvatarSetup>().health -= damage;
                 _lock = true;
             }
