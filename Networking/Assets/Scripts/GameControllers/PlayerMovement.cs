@@ -34,18 +34,18 @@ public class PlayerMovement : MonoBehaviour
             if(isAttacking == false)
             {
                 RotateToForward();
-                BasicMovement();
+                float speed = BasicMovement();
                 BasicRotation();
-                RunningMovement();
+                RunningMovement(speed);
                 Attack();
             }
         }
     }
 
-    void BasicMovement()
+    float BasicMovement()
     {
-        float ver = Input.GetAxisRaw("Vertical");
-        float hor = Input.GetAxisRaw("Horizontal");
+        float ver = Input.GetAxis("Vertical");
+        float hor = Input.GetAxis("Horizontal");
         float speed = 0;
 
         if (ver != 0)
@@ -57,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
         transform.position += avatarSetup.myCharacter.transform.forward * (maxSpeed * speed * runSpeed) * Time.deltaTime;
 
         avatarSetup.animator.SetFloat("Speed", Mathf.Abs(speed));
+
+        return speed;
     }
 
     void BasicRotation()
@@ -91,10 +93,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void RunningMovement()
+    void RunningMovement(float speed)
     {
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
+        if (Input.GetKey(KeyCode.LeftShift) && speed != 0)
+        { 
             isRunning = true;
             runSpeed = 2f;
         }

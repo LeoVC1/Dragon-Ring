@@ -42,8 +42,8 @@ public class AvatarCombat : MonoBehaviour
             rayOrigin = avatarSetup.myCharacter.GetComponent<CharacterScript>().swordLocation;
             RaycastHit[] hits;
             Ray ray = new Ray(rayOrigin.position, rayOrigin.TransformDirection(-Vector3.up));
-            Debug.DrawRay(ray.origin, ray.direction, Color.yellow, 0.5f);
-            hits = Physics.RaycastAll(ray, 0.5f);
+            Debug.DrawRay(ray.origin, ray.direction, Color.yellow, 1f);
+            hits = Physics.RaycastAll(ray, 1f);
             if (hits.Length > 0)
             {
                 foreach(var hit in hits)
