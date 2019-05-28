@@ -40,5 +40,6 @@ MonoBehaviour:
   - RPC_Respawn
   - RPC_AnimateMovement
   - RPC_WarriorAttack
+  - DestroyItem
   DisableAutoOpenWizard: 1
   ShowSettings: 1

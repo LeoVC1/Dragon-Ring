@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupImage: {fileID: 569141053}
-  prefab: {fileID: 0}
+  instantiated: {fileID: 0}
 --- !u!1 &240763396
 GameObject:
   m_ObjectHideFlags: 0

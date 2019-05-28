@@ -9,25 +9,20 @@ public class Item : MonoBehaviour
 {
     public GameObject pickupImage;
     public GameObject instantiated;
-    PhotonView PV;
 
     private void Start()
     {
-        PV = GetComponent<PhotonView>();
         SpawnRandomItem();
-
     }
 
-    public void PickUp()
+    public void PickUp(PhotonView PV)
     {
-        Destroy(gameObject);
-        Destroy(instantiated);
+        PV.RPC("RPC_DestroyItem", RpcTarget.All, instantiated.GetComponent<PhotonView>().ViewID);
     }
 
     void SpawnRandomItem()
     {
         instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "Item"), transform.position, transform.rotation);
+        instantiated.transform.parent = transform;
     }
-
-
 }

@@ -59,7 +59,7 @@ public class PlayerItemPickUp : MonoBehaviour
             PickUpTimer();
             if(pickUpValue >= pickUpTime)
             {
-                pickUpItem.PickUp();
+                pickUpItem.PickUp(PV);
                 pickupImage = null;
                 pickUpItem = null;
             }
@@ -89,6 +89,12 @@ public class PlayerItemPickUp : MonoBehaviour
             pickupImage = null;
             _lock = false;
         }
+    }
+
+    [PunRPC]
+    void RPC_DestroyItem(int viewId)
+    {
+        Destroy(PhotonView.Find(viewId).gameObject);
     }
 
 }
