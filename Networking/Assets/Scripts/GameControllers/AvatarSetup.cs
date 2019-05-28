@@ -31,6 +31,7 @@ public class AvatarSetup : MonoBehaviour
         }
         else
         {
+            //aaaaaaaa
             Destroy(myCamera);
             Destroy(myAL);
         }
