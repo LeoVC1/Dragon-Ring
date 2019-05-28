@@ -36,6 +36,7 @@ public class PlayerItemPickUp : MonoBehaviour
             return;
         if (other.CompareTag("Item"))
         {
+            print("Item!");
             pickupImage = other.GetComponent<Item>().pickupImage;
             pickupImage.SetActive(true);
             _lock = true;
