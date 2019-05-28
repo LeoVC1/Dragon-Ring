@@ -7,5 +7,6 @@ public class CharacterScript : MonoBehaviour
 {
     public Transform swordLocation;
     public Transform neckLocation;
+    public Transform rayTransform;
     PhotonView PV;
 }

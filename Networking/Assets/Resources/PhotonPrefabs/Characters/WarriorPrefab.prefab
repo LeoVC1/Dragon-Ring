@@ -928,6 +928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swordLocation: {fileID: 1373890955970404480}
   neckLocation: {fileID: 2369012058450877845}
+  rayTransform: {fileID: 1373890956775445760}
 --- !u!135 &6227280114749284097
 SphereCollider:
   m_ObjectHideFlags: 0

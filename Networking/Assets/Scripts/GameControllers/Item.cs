@@ -6,4 +6,9 @@ using UnityEngine.UI;
 public class Item : MonoBehaviour
 {
     public GameObject pickupImage;
+
+    public void PickUp()
+    {
+        Destroy(gameObject);
+    }
 }

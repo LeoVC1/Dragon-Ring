@@ -58,6 +58,7 @@ MonoBehaviour:
   runSpeed: 1
   rotationSpeed: 100
   stamina: 0
+  isPickingItem: 0
   isAttacking: 0
 --- !u!114 &1310
 MonoBehaviour:
@@ -142,7 +143,6 @@ MonoBehaviour:
   health: 100
   myCamera: {fileID: 2788480217675629888}
   myAL: {fileID: 0}
-  avatarCombat: {fileID: 0}
   animator: {fileID: 0}
 --- !u!114 &3854453130902014550
 MonoBehaviour:
@@ -156,6 +156,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2e851e554fe1a459ae32cab4078ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 0.35
+  mask:
+    serializedVersion: 2
+    m_Bits: 1024
+  pickUpValue: 0
 --- !u!114 &5650104462317382666
 MonoBehaviour:
   m_ObjectHideFlags: 0

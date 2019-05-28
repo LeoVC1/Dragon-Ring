@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 1;
     public float rotationSpeed = 50;
     public float stamina;
+    public bool isPickingItem = false;
     bool isRunning = false;
     bool isBreathing = false;
 
@@ -35,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (PV.IsMine && ShopController.SC.isShopping == false)
         {
-            if(isAttacking == false)
+            if(isAttacking == false && isPickingItem == false)
             {
                 RotateToForward();
                 float speed = BasicMovement();
@@ -135,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
             else
                 avatarSetup.animator.SetTrigger("Attack2");
             isAttacking = true;
-            Invoke("EndAttack", 1.5f);
+            Invoke("EndAttack", 1.1f);
         }
     }
 

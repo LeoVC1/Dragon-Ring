@@ -16,7 +16,6 @@ public class AvatarSetup : MonoBehaviour
 
     public Camera myCamera;
     public AudioListener myAL;
-    public AvatarCombat avatarCombat;
 
     public Animator animator;
 
@@ -31,7 +30,6 @@ public class AvatarSetup : MonoBehaviour
         }
         else
         {
-            //aaaaaaaa
             Destroy(myCamera);
             Destroy(myAL);
         }
