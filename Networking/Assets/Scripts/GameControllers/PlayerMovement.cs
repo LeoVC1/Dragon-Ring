@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 
 public class PlayerMovement : MonoBehaviour
 {
 
+    Image staminaBar;
     PhotonView PV;
     public float maxSpeed = 2;
     public float runSpeed = 1;
     public float rotationSpeed = 50;
+    public float stamina;
     bool isRunning = false;
+    bool isBreathing = false;
 
     private AvatarSetup avatarSetup;
     AvatarCombat avatarCombat;
@@ -24,9 +28,9 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         avatarSetup = GetComponent<AvatarSetup>();
         avatarCombat = GetComponent<AvatarCombat>();
+        staminaBar = GameSetup.GS.playerManaBar;
     }
 
-    
     void Update()
     {
         if (PV.IsMine && ShopController.SC.isShopping == false)
@@ -95,17 +99,31 @@ public class PlayerMovement : MonoBehaviour
 
     void RunningMovement(float speed)
     {
-        if (Input.GetKey(KeyCode.LeftShift) && speed != 0)
+        if (Input.GetKey(KeyCode.LeftShift) && speed != 0 && stamina > 0 && isBreathing == false)
         { 
             isRunning = true;
-            runSpeed = 2f;
+            runSpeed = 2.5f;
+            stamina -= 15 * Time.deltaTime;
         }
         else
         {
             isRunning = false;
             runSpeed = 1;
+            if(stamina < 100)
+                stamina += 10 * Time.deltaTime;
+            if(isBreathing == false && stamina < 0)
+            {
+                isBreathing = true;
+                Invoke("TakeABreath", 2);
+            }
         }
         avatarSetup.animator.SetBool("Run", isRunning);
+        staminaBar.fillAmount = stamina / 100f;
+    }
+
+    void TakeABreath()
+    {
+        isBreathing = false;
     }
 
     void Attack()

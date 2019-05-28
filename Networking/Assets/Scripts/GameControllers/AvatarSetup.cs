@@ -5,6 +5,7 @@ using Photon.Pun;
 using UnityEngine.UI;
 using TMPro;
 using System.IO;
+using Cinemachine;
 
 public class AvatarSetup : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class AvatarSetup : MonoBehaviour
 
     public float health;
 
-    public Camera myCamera;
+    public CinemachineFreeLook myCamera;
     public AudioListener myAL;
     public AvatarCombat avatarCombat;
 
@@ -42,6 +43,7 @@ public class AvatarSetup : MonoBehaviour
         myCharacter = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Characters", "WarriorPrefab"), transform.position - new Vector3(0, 0.5f, 0), transform.rotation);
         myCharacter.transform.parent = transform;
         animator = myCharacter.GetComponent<Animator>();
+        myCamera.LookAt = myCharacter.GetComponent<CharacterScript>().neckLocation;
         
         //myCharacter.GetComponentInChildren<TextMeshPro>().text = myNick;
         //Instantiate(PlayerInfo.PI.allCharacters[whichCharacter], transform

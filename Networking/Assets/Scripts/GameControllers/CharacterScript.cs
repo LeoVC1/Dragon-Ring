@@ -6,5 +6,6 @@ using Photon.Pun;
 public class CharacterScript : MonoBehaviour
 {
     public Transform swordLocation;
+    public Transform neckLocation;
     PhotonView PV;
 }

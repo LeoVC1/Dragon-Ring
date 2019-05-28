@@ -11,6 +11,7 @@ public class GameSetup : MonoBehaviour
     public Transform[] spawnPoints;
 
     public Image playerHealthBar;
+    public Image playerManaBar;
 
     public GameObject escButtons;
 
