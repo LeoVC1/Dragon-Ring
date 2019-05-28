@@ -13,7 +13,7 @@ public class PlayerItemPickUp : MonoBehaviour
     Item pickUpItem;
     Transform playerTarget;
     bool _lock;
-    float pickUpTime = 0.7f;
+    float pickUpTime = 1f;
     public float pickUpValue = 0;
 
 
@@ -55,6 +55,8 @@ public class PlayerItemPickUp : MonoBehaviour
     {
         if (_lock)
         {
+            if(pickUpItem != null)
+                pickUpItem.timerPickUp.fillAmount = pickUpValue;
             ImageFollowCamera();
             PickUpTimer();
             if(pickUpValue >= pickUpTime)
