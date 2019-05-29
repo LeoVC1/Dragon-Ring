@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MenuController : MonoBehaviour
 {
-    
     public void OnClickCharacterPick(int whichCharacter)
     {
         if(PlayerInfo.PI != null)
@@ -16,7 +15,4 @@ public class MenuController : MonoBehaviour
             PI.ChangeExample(whichCharacter);
         }
     }
-
-
-
 }
