@@ -9,9 +9,7 @@ public class PlayerItemPickUp : MonoBehaviour
     public LayerMask mask;
     PhotonView PV;
     AvatarSetup avatarSetup;
-    GameObject pickupImage;
-    Item pickUpItem;
-    Transform playerTarget;
+    public Item pickUpItem;
     bool _lock;
     float pickUpTime = 1f;
     public float pickUpValue = 0;
@@ -23,7 +21,6 @@ public class PlayerItemPickUp : MonoBehaviour
         if (!PV.IsMine)
             return;
         avatarSetup = GetComponent<AvatarSetup>();
-        playerTarget = GetComponent<AvatarSetup>().myCamera.transform;
     }
 
     private void Update()
@@ -31,16 +28,16 @@ public class PlayerItemPickUp : MonoBehaviour
         if (!PV.IsMine)
             return;
 
-        OnItem();
-        SelectItem();
-    }
-
-    void ImageFollowCamera()
-    {
-        if (pickupImage == null)
-            return;
-        pickupImage.transform.LookAt(playerTarget);
-        pickupImage.transform.Rotate(0, 180, 0);
+        if(pickUpItem != null)
+        {
+            Teste();
+        }
+        else
+        {
+            _lock = false;
+        }
+        //OnItem();
+        //SelectItem();
     }
 
     void PickUpTimer()
@@ -55,14 +52,12 @@ public class PlayerItemPickUp : MonoBehaviour
     {
         if (_lock)
         {
-            if(pickUpItem != null)
+            if (pickUpItem != null)
                 pickUpItem.timerPickUp.fillAmount = pickUpValue;
-            ImageFollowCamera();
             PickUpTimer();
             if(pickUpValue >= pickUpTime)
             {
                 pickUpItem.PickUp(PV);
-                pickupImage = null;
                 pickUpItem = null;
             }
 
@@ -72,12 +67,12 @@ public class PlayerItemPickUp : MonoBehaviour
             pickUpValue = 0;
         }
     }
-
+    /*
     void SelectItem()
     {
         Ray ray = new Ray(transform.position - new Vector3(0, offset, 0), avatarSetup.myCharacter.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction, Color.yellow);
-        if(Physics.Raycast(ray, out RaycastHit hit, 1, mask, QueryTriggerInteraction.Collide))
+        if(Physics.Raycast(ray, out RaycastHit hit, 1, mask))
         {
             pickUpItem = hit.collider.GetComponent<Item>();
             pickupImage = hit.collider.GetComponent<Item>().pickupImage;
@@ -91,6 +86,12 @@ public class PlayerItemPickUp : MonoBehaviour
             pickupImage = null;
             _lock = false;
         }
+    }*/
+
+    public void Teste()
+    {
+        _lock = true;
+        OnItem();
     }
 
     [PunRPC]
