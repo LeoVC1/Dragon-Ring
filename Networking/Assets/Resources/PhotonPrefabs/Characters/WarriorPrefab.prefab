@@ -798,6 +798,7 @@ GameObject:
   - component: {fileID: 8897216410952257797}
   - component: {fileID: 4021232369006021570}
   - component: {fileID: 8057372672817552949}
+  - component: {fileID: 3889394259976320258}
   m_Layer: 9
   m_Name: WarriorPrefab
   m_TagString: Untagged
@@ -929,6 +930,41 @@ MonoBehaviour:
   swordLocation: {fileID: 1373890955970404480}
   neckLocation: {fileID: 2369012058450877845}
   rayTransform: {fileID: 1373890956775445760}
+--- !u!114 &3889394259976320258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2687051744806957268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71f22ec066fbdc42b60b0ecbbb53f30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objetos:
+  - {fileID: 2687051744318203667}
+  - {fileID: 2687051744643590879}
+  - {fileID: 2687051745226009597}
+  - {fileID: 2687051744472499175}
+  - {fileID: 2687051745423593691}
+  - {fileID: 2687051745522232901}
+  - {fileID: 2687051743945154798}
+  - {fileID: 2687051745018115519}
+  - {fileID: 2687051744915443850}
+  - {fileID: 2687051745710798439}
+  - {fileID: 2687051744889362390}
+  - {fileID: 2687051744830564119}
+  - {fileID: 2687051745249248693}
+  - {fileID: 2687051743721497367}
+  - {fileID: 2687051743875761568}
+  - {fileID: 2687051744700624659}
+  - {fileID: 2687051745114262268}
+  - {fileID: 2687051744681653042}
+  - {fileID: 2687051745499845793}
+  _materiaisBronze: {fileID: 0}
+  _materiaisPrata: {fileID: 0}
+  _materiaisOuro: {fileID: 0}
 --- !u!135 &6227280114749284097
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2777,7 +2813,7 @@ PrefabInstance:
     - target: {fileID: 4131774816591356085, guid: 97d2cd3e2836b104c863d7a5f73d7194,
         type: 3}
       propertyPath: m_Name
-      value: Saiaaa
+      value: Saia
       objectReference: {fileID: 0}
     - target: {fileID: 4131774816591356085, guid: 97d2cd3e2836b104c863d7a5f73d7194,
         type: 3}
@@ -13682,6 +13718,12 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97d2cd3e2836b104c863d7a5f73d7194, type: 3}
+--- !u!1 &2687051744681653042 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4131774816591356085, guid: 97d2cd3e2836b104c863d7a5f73d7194,
+    type: 3}
+  m_PrefabInstance: {fileID: 2025863500454351751}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373890956952142113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1084341206642840230, guid: 97d2cd3e2836b104c863d7a5f73d7194,
@@ -13698,7 +13740,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 0e3702e14e540bf4cac8c932d5f7a0db,
         type: 3}
       propertyPath: m_Name
-      value: "MeioCal\xE7a"
+      value: Cueca
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 0e3702e14e540bf4cac8c932d5f7a0db,
         type: 3}
@@ -13782,15 +13824,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0e199b6461b140447b256d696d9ad398, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e3702e14e540bf4cac8c932d5f7a0db, type: 3}
---- !u!1 &2687051745499845793 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 0e3702e14e540bf4cac8c932d5f7a0db,
-    type: 3}
-  m_PrefabInstance: {fileID: 6227280113358327208}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373890955589609138 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 0e3702e14e540bf4cac8c932d5f7a0db,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280113358327208}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2687051745499845793 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 0e3702e14e540bf4cac8c932d5f7a0db,
     type: 3}
   m_PrefabInstance: {fileID: 6227280113358327208}
   m_PrefabAsset: {fileID: 0}
@@ -13804,7 +13846,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: f00aead83b48bb14cbc48188ebe5b265,
         type: 3}
       propertyPath: m_Name
-      value: Sdr
+      value: BotaDireita
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: f00aead83b48bb14cbc48188ebe5b265,
         type: 3}
@@ -13894,6 +13936,12 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f00aead83b48bb14cbc48188ebe5b265, type: 3}
+--- !u!1 &2687051745423593691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: f00aead83b48bb14cbc48188ebe5b265,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280113417734610}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373890955664941768 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: f00aead83b48bb14cbc48188ebe5b265,
@@ -14150,7 +14198,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 33ff5d478e3c9dc41b4f459533148aa1,
         type: 3}
       propertyPath: m_Name
-      value: Lvdr
+      value: LuvaDireita
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 33ff5d478e3c9dc41b4f459533148aa1,
         type: 3}
@@ -14251,6 +14299,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6227280113577467068}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2687051745249248693 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 33ff5d478e3c9dc41b4f459533148aa1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280113577467068}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6227280113635962734
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14261,7 +14315,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 6bc7a1786de07d943ad04f2b774750f7,
         type: 3}
       propertyPath: m_Name
-      value: Esq
+      value: BracoEsquerdo
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 6bc7a1786de07d943ad04f2b774750f7,
         type: 3}
@@ -14359,6 +14413,12 @@ PrefabInstance:
 --- !u!4 &1373890955919852660 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 6bc7a1786de07d943ad04f2b774750f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280113635962734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2687051745710798439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 6bc7a1786de07d943ad04f2b774750f7,
     type: 3}
   m_PrefabInstance: {fileID: 6227280113635962734}
   m_PrefabAsset: {fileID: 0}
@@ -14492,7 +14552,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 10c378bd1c6c93143b7af2e9d154e311,
         type: 3}
       propertyPath: m_Name
-      value: PerdaD
+      value: PernaDireita
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 10c378bd1c6c93143b7af2e9d154e311,
         type: 3}
@@ -14585,6 +14645,12 @@ PrefabInstance:
 --- !u!4 &1373890956115631190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 10c378bd1c6c93143b7af2e9d154e311,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280113851791180}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2687051745522232901 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 10c378bd1c6c93143b7af2e9d154e311,
     type: 3}
   m_PrefabInstance: {fileID: 6227280113851791180}
   m_PrefabAsset: {fileID: 0}
@@ -14714,7 +14780,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: c26e279f45bfacf4a893c3cacc207931,
         type: 3}
       propertyPath: m_Name
-      value: Lves
+      value: LuvaEsquerda
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: c26e279f45bfacf4a893c3cacc207931,
         type: 3}
@@ -14809,6 +14875,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 08abfc241cdaf94468318b20516b2754, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c26e279f45bfacf4a893c3cacc207931, type: 3}
+--- !u!1 &2687051744915443850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: c26e279f45bfacf4a893c3cacc207931,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280113915398531}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373890956181480089 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: c26e279f45bfacf4a893c3cacc207931,
@@ -14825,7 +14897,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 1a1627c06719475408a364775349e2d5,
         type: 3}
       propertyPath: m_Name
-      value: Eq
+      value: CotoveloEsquerdo
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 1a1627c06719475408a364775349e2d5,
         type: 3}
@@ -14920,6 +14992,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1eeca30133e1758449561c5197e5691c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a1627c06719475408a364775349e2d5, type: 3}
+--- !u!1 &2687051744889362390 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 1a1627c06719475408a364775349e2d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280113956163295}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373890956204418501 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 1a1627c06719475408a364775349e2d5,
@@ -14936,7 +15014,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 2e01915243a602c44b788fd3654fede5,
         type: 3}
       propertyPath: m_Name
-      value: OmbreiraE
+      value: OmbreiraEsquerda
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 2e01915243a602c44b788fd3654fede5,
         type: 3}
@@ -15020,6 +15098,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: fb457431978238f4497d719e6e1aa8d8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e01915243a602c44b788fd3654fede5, type: 3}
+--- !u!1 &2687051744830564119 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 2e01915243a602c44b788fd3654fede5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280114031754782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373890956263085316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 2e01915243a602c44b788fd3654fede5,
@@ -15036,7 +15120,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: f515d115cbc4f4c4fadab9d6c0d3f5de,
         type: 3}
       propertyPath: m_Name
-      value: PessEq
+      value: TornozeleiraEsquerda
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: f515d115cbc4f4c4fadab9d6c0d3f5de,
         type: 3}
@@ -15129,6 +15213,12 @@ PrefabInstance:
 --- !u!4 &1373890956408707566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: f515d115cbc4f4c4fadab9d6c0d3f5de,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280114158498548}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2687051745226009597 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: f515d115cbc4f4c4fadab9d6c0d3f5de,
     type: 3}
   m_PrefabInstance: {fileID: 6227280114158498548}
   m_PrefabAsset: {fileID: 0}
@@ -15231,6 +15321,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4533ef671eb0d4c42a04aedacdb6dbf2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfea704afab782d4d850c3bbfe05489a, type: 3}
+--- !u!1 &2687051745114262268 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: dfea704afab782d4d850c3bbfe05489a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280114249257973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373890956515342575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: dfea704afab782d4d850c3bbfe05489a,
@@ -15247,7 +15343,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 6c50c5c74b5cf3a458fccda3f2a14f93,
         type: 3}
       propertyPath: m_Name
-      value: PernaD
+      value: CoxaDireita
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 6c50c5c74b5cf3a458fccda3f2a14f93,
         type: 3}
@@ -15331,15 +15427,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b3b56957ee1c18543871a2fbea35acef, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c50c5c74b5cf3a458fccda3f2a14f93, type: 3}
---- !u!1 &2687051745018115519 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 6c50c5c74b5cf3a458fccda3f2a14f93,
-    type: 3}
-  m_PrefabInstance: {fileID: 6227280114353876150}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373890956619876268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 6c50c5c74b5cf3a458fccda3f2a14f93,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280114353876150}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2687051745018115519 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 6c50c5c74b5cf3a458fccda3f2a14f93,
     type: 3}
   m_PrefabInstance: {fileID: 6227280114353876150}
   m_PrefabAsset: {fileID: 0}
@@ -15353,7 +15449,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: eaf7fb23397a9e84e81fe840d40bd266,
         type: 3}
       propertyPath: m_Name
-      value: Seq
+      value: BotaEsquerda
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: eaf7fb23397a9e84e81fe840d40bd266,
         type: 3}
@@ -15449,6 +15545,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6227280114525240858}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2687051744318203667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: eaf7fb23397a9e84e81fe840d40bd266,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280114525240858}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6227280114706953754
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15459,7 +15561,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: c795c96a850e159478d6931a066463db,
         type: 3}
       propertyPath: m_Name
-      value: OmbreiraD
+      value: OmbreiraDireita
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: c795c96a850e159478d6931a066463db,
         type: 3}
@@ -15549,6 +15651,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6227280114706953754}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2687051744700624659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: c795c96a850e159478d6931a066463db,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280114706953754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6227280114717848534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15559,7 +15667,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 1cd7626465d5d89408c4246cd12c81b4,
         type: 3}
       propertyPath: m_Name
-      value: PerdaE
+      value: PernaEsquerda
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 1cd7626465d5d89408c4246cd12c81b4,
         type: 3}
@@ -15649,6 +15757,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6227280114717848534}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2687051744643590879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 1cd7626465d5d89408c4246cd12c81b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280114717848534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6227280114882697966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15659,7 +15773,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: d39a0342f13b63843b59c5ca5ff97e63,
         type: 3}
       propertyPath: m_Name
-      value: PernaE
+      value: CoxaEsquerda
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: d39a0342f13b63843b59c5ca5ff97e63,
         type: 3}
@@ -15743,15 +15857,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c2d6e6489d03cd24a8163fe78a187388, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d39a0342f13b63843b59c5ca5ff97e63, type: 3}
---- !u!1 &2687051744472499175 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: d39a0342f13b63843b59c5ca5ff97e63,
-    type: 3}
-  m_PrefabInstance: {fileID: 6227280114882697966}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373890957165359604 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: d39a0342f13b63843b59c5ca5ff97e63,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280114882697966}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2687051744472499175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: d39a0342f13b63843b59c5ca5ff97e63,
     type: 3}
   m_PrefabInstance: {fileID: 6227280114882697966}
   m_PrefabAsset: {fileID: 0}
@@ -15765,7 +15879,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 5912740e288215b47899958ae03bd47c,
         type: 3}
       propertyPath: m_Name
-      value: Direita
+      value: BracoDireito
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 5912740e288215b47899958ae03bd47c,
         type: 3}
@@ -15855,6 +15969,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6227280114955082921}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2687051743875761568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 5912740e288215b47899958ae03bd47c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280114955082921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6227280115136625182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15865,7 +15985,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: f8bfaaa239a30074fabcbcbdbdfcde45,
         type: 3}
       propertyPath: m_Name
-      value: Dr
+      value: CotoveloDireito
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: f8bfaaa239a30074fabcbcbdbdfcde45,
         type: 3}
@@ -15965,6 +16085,12 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8bfaaa239a30074fabcbcbdbdfcde45, type: 3}
+--- !u!1 &2687051743721497367 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: f8bfaaa239a30074fabcbcbdbdfcde45,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280115136625182}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373890957368086788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: f8bfaaa239a30074fabcbcbdbdfcde45,
@@ -16081,7 +16207,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 1ae7126187ca9e646b51442297284c09,
         type: 3}
       propertyPath: m_Name
-      value: PessEd
+      value: TornozeleiraDireita
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 1ae7126187ca9e646b51442297284c09,
         type: 3}
@@ -16176,6 +16302,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 642407a679fae484792b77abf61136a0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ae7126187ca9e646b51442297284c09, type: 3}
+--- !u!1 &2687051743945154798 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 1ae7126187ca9e646b51442297284c09,
+    type: 3}
+  m_PrefabInstance: {fileID: 6227280115428932071}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373890957692834557 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 1ae7126187ca9e646b51442297284c09,
@@ -16192,7 +16324,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 0b36e084481d71a4dabce09cd5912301,
         type: 3}
       propertyPath: m_Name
-      value: HeadArmor
+      value: Capacete
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 0b36e084481d71a4dabce09cd5912301,
         type: 3}
