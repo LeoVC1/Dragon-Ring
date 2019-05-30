@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[System.Serializable]
+public struct Armor
+{
+    public string name;
+    public GameObject _objeto;
+    public Material _matBronze;
+    public Material _matFerro;
+    public Material _matOuro;
+}
 public class ChangeItem : MonoBehaviour
 {
-    [Header("Objeto:")]
-    public GameObject[] _objetos;
-
-    [Header("Materiais Bronze _EM ORDEM_")]
-    public Material _materiaisBronze;
-
-    [Header("Materiais Prata _EM ORDEM_")]
-    public Material _materiaisPrata;
-
-    [Header("Materiais Ouro _EM ORDEM_")]
-    public Material _materiaisOuro;
+    [Header("Objetos da Armadura:")]
+    public Armor[] armor;
+    
 
     void Start()
     {
