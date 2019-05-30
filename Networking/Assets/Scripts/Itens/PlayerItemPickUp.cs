@@ -57,8 +57,10 @@ public class PlayerItemPickUp : MonoBehaviour
             PickUpTimer();
             if(pickUpValue >= pickUpTime)
             {
+                GetComponentInChildren<ItemCollider>().nearItens.Remove(pickUpItem.GetComponent<Collider>());
                 pickUpItem.PickUp(PV);
                 pickUpItem = null;
+                pickUpValue = 0;
             }
 
         }

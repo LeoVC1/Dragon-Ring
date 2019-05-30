@@ -36,9 +36,10 @@ public class ItemCollider : MonoBehaviour
     {
         if (!PV.IsMine)
             return;
-        if (other.CompareTag("Item") && !nearItens.Contains(other))
+        if (other.CompareTag("Item"))
         {
-            nearItens.Add(other);
+            if(!nearItens.Contains(other))
+                nearItens.Add(other);
             for(int i = 0; i < nearItens.Count; i++)
             {
                 float distance = Vector3.Distance(transform.position, nearItens[i].transform.position);
@@ -46,16 +47,18 @@ public class ItemCollider : MonoBehaviour
                 {
                     nearestDistance = distance;
                     nearestItem = nearItens[i];
-                    pickUpScript.pickUpItem = nearItens[i].GetComponent<Item>();
-                    nearItens[i].GetComponent<Item>().pickupImage.gameObject.SetActive(true);
-                    pickupImage = nearItens[i].GetComponent<Item>().pickupImage;
                 }
-                else
-                {
-                    nearItens[i].GetComponent<Item>().pickupImage.gameObject.SetActive(false);
-                }
+                nearItens[i].GetComponent<Item>().pickupImage.gameObject.SetActive(false);
             }
+            ChangeItem(nearestItem);
         }
+    }
+
+    void ChangeItem(Collider coll)
+    {
+        pickUpScript.pickUpItem = coll.GetComponent<Item>();
+        coll.GetComponent<Item>().pickupImage.gameObject.SetActive(true);
+        pickupImage = coll.GetComponent<Item>().pickupImage;
     }
 
     private void OnTriggerExit(Collider other)
