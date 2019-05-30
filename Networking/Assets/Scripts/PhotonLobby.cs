@@ -4,13 +4,14 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using TMPro;
 
 public class PhotonLobby : MonoBehaviourPunCallbacks
 {
 
     public static PhotonLobby lobby;
 
-    public Text serverStatus;
+    public TextMeshProUGUI serverStatus;
     public GameObject battleButton;
     public GameObject cancelButton;
     public InputField nickName;
