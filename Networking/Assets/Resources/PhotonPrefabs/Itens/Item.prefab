@@ -373,6 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e103793747d199145b2d8d9b484b8e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
   pickupImage: {fileID: 866387133381274722}
   timerPickUp: {fileID: 4413060424500644949}
 --- !u!54 &1732957334925558850

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -646,7 +646,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.109375, y: 0.03515625, z: 0.0234375, w: -0.03515625}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 3.6e-43}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -9291,7 +9291,7 @@ MonoBehaviour:
   serverStatus: {fileID: 839272408}
   battleButton: {fileID: 939029399}
   cancelButton: {fileID: 1324354418}
-  nickName: {fileID: 1527002789}
+  nickName: {fileID: 80511405}
 --- !u!4 &1982091150
 Transform:
   m_ObjectHideFlags: 0

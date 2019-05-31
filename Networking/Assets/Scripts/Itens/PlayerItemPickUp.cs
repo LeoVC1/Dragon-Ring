@@ -8,6 +8,7 @@ public class PlayerItemPickUp : MonoBehaviour
     public float offset;
     public LayerMask mask;
     PhotonView PV;
+    Inventario inventario;
     AvatarSetup avatarSetup;
     public Item pickUpItem;
     bool _lock;
@@ -21,6 +22,7 @@ public class PlayerItemPickUp : MonoBehaviour
         if (!PV.IsMine)
             return;
         avatarSetup = GetComponent<AvatarSetup>();
+        inventario = GetComponent<Inventario>();
     }
 
     private void Update()
@@ -36,8 +38,6 @@ public class PlayerItemPickUp : MonoBehaviour
         {
             _lock = false;
         }
-        //OnItem();
-        //SelectItem();
     }
 
     void PickUpTimer()
@@ -59,6 +59,7 @@ public class PlayerItemPickUp : MonoBehaviour
             {
                 GetComponentInChildren<ItemCollider>().nearItens.Remove(pickUpItem.GetComponent<Collider>());
                 pickUpItem.PickUp(PV);
+                inventario.ChangeArmor(pickUpItem.level);
                 pickUpItem = null;
                 pickUpValue = 0;
             }

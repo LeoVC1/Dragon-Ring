@@ -15,16 +15,5 @@ public class ChangeItem : MonoBehaviour
 {
     [Header("Objetos da Armadura:")]
     public Armor[] armor;
-    
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

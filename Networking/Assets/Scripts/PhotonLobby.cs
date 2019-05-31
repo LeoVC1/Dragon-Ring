@@ -14,7 +14,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     public TextMeshProUGUI serverStatus;
     public GameObject battleButton;
     public GameObject cancelButton;
-    public InputField nickName;
+    public TMP_InputField nickName;
     bool online;
     bool searching;
 

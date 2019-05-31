@@ -7,8 +7,14 @@ using System.IO;
 
 public class Item : MonoBehaviour
 {
+    public int level;
     public GameObject pickupImage;
     public Image timerPickUp;
+
+    private void Start()
+    {
+        level = Random.Range(1, 3);
+    }
 
     public void PickUp(PhotonView PV)
     {

@@ -13,6 +13,7 @@ public class ItemCollider : MonoBehaviour
 
     PhotonView PV;
     Transform playerTarget;
+    Inventario inventario;
     GameObject pickupImage;
 
     float nearestDistance;
@@ -23,6 +24,7 @@ public class ItemCollider : MonoBehaviour
         if (!PV.IsMine)
             return;
         playerTarget = GetComponentInParent<AvatarSetup>().myCamera.transform;
+        inventario = GetComponentInParent<Inventario>();
     }
 
     private void Update()
@@ -38,7 +40,7 @@ public class ItemCollider : MonoBehaviour
             return;
         if (other.CompareTag("Item"))
         {
-            if(!nearItens.Contains(other))
+            if(!nearItens.Contains(other) && inventario.armorLevel < other.GetComponent<Item>().level)
                 nearItens.Add(other);
             for(int i = 0; i < nearItens.Count; i++)
             {

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1310}
   - component: {fileID: 1269}
   - component: {fileID: 1266}
+  - component: {fileID: 2641236829368089143}
   - component: {fileID: 1265}
   - component: {fileID: 1267}
   - component: {fileID: 3854453130902014550}
@@ -113,6 +114,20 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 1
   isRuntimeInstantiated: 0
+--- !u!114 &2641236829368089143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b909da89b714f74f9216906ba8ec323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armorLevel: 0
+  helmetLevel: 0
 --- !u!114 &1265
 MonoBehaviour:
   m_ObjectHideFlags: 0
