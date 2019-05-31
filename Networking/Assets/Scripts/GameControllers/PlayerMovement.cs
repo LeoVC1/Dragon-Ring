@@ -21,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     AvatarCombat avatarCombat;
     public bool isAttacking;
 
+    public Transform camT;
+    Vector3 camF;
+
     void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -52,12 +55,7 @@ public class PlayerMovement : MonoBehaviour
         float ver = Input.GetAxis("Vertical");
         float hor = Input.GetAxis("Horizontal");
         float speed = 0;
-
-        if (ver != 0)
-            speed = ver;
-        else if (hor != 0)
-            speed = hor;
-
+        speed += Mathf.Clamp(Mathf.Abs(ver) + Mathf.Abs(hor), 0, 1);
         speed = Mathf.Abs(speed);
         transform.position += avatarSetup.myCharacter.transform.forward * (maxSpeed * speed * runSpeed) * Time.deltaTime;
 
@@ -70,31 +68,16 @@ public class PlayerMovement : MonoBehaviour
     {
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * rotationSpeed;
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * rotationSpeed;
-        transform.Rotate(new Vector3(0, mouseX, 0));
+        //transform.Rotate(new Vector3(0, mouseX, 0));
     }
 
     void RotateToForward()
     {
-        Vector3 originEulerAngles = avatarSetup.myCharacter.transform.eulerAngles;
+        camF = Vector3.Scale(camT.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 moveDir = camT.right * Input.GetAxis("Horizontal") + camF * Input.GetAxis("Vertical");
+        if (moveDir.magnitude > 0)
+            avatarSetup.myCharacter.transform.forward = Vector3.Lerp(avatarSetup.myCharacter.transform.forward, moveDir, 0.5f);
 
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
-            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y + 45;
-        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
-            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y - 45;
-        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
-            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y + 135;
-        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
-            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y + 225;
-        else if (Input.GetKey(KeyCode.W))
-            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y;
-        else if (Input.GetKey(KeyCode.A))
-            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y - 90;
-        else if (Input.GetKey(KeyCode.S))
-            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y + 180;
-        else if (Input.GetKey(KeyCode.D))
-            originEulerAngles.y = avatarSetup.myCamera.transform.eulerAngles.y + 90;
-
-        avatarSetup.myCharacter.transform.eulerAngles = originEulerAngles;
 
     }
 

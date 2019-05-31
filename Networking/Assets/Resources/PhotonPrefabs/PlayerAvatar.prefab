@@ -61,6 +61,7 @@ MonoBehaviour:
   stamina: 0
   isPickingItem: 0
   isAttacking: 0
+  camT: {fileID: 665503642644642418}
 --- !u!114 &1310
 MonoBehaviour:
   m_ObjectHideFlags: 0
