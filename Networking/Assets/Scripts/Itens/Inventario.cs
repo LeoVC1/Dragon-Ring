@@ -21,22 +21,42 @@ public class Inventario : MonoBehaviour
         if (changeItem == null)
             changeItem = avatarSetup.myCharacter.GetComponent<ChangeItem>();
 
-        foreach(Armor a in changeItem.armor)
+        switch (level)
         {
-            if(a._objeto != null)
-            {
-                switch (level)
+            case 1:
+                for (int i = changeItem.armor1.Count - 1; i >= 0; i--)
                 {
-                    case 1:
-                        a._objeto.GetComponent<MeshRenderer>().material = a._matFerro;
-                        armorLevel = 1;
-                        break;
-                    case 2:
-                        a._objeto.GetComponent<MeshRenderer>().material = a._matOuro;
-                        armorLevel = 2;
-                        break;
+                    changeItem.previousArmor[i].SetActive(false);
+                    changeItem.previousArmor.Remove(changeItem.previousArmor[i]);
+                    changeItem.armor1[i].SetActive(true);
+                    changeItem.previousArmor.Add(changeItem.armor1[i]);
                 }
-            }
+                //StartCoroutine(EnableNewArmor(changeItem.armor1));
+                armorLevel = 1;
+                break;
+            case 2:
+                for (int i = changeItem.armor2.Count - 1; i >= 0; i--)
+                {
+                    changeItem.previousArmor[i].SetActive(false);
+                    changeItem.previousArmor.Remove(changeItem.previousArmor[i]);
+                    changeItem.armor2[i].SetActive(true);
+                    changeItem.previousArmor.Add(changeItem.armor2[i]);
+                }
+                //StartCoroutine(EnableNewArmor(changeItem.armor2));
+                armorLevel = 2;
+                break;
+        }
+    }
+
+    IEnumerator EnableNewArmor(List<GameObject> objects)
+    {
+        for(int i = objects.Count - 1; i >= 0; i--)
+        {
+            changeItem.previousArmor[i].SetActive(false);
+            changeItem.previousArmor.Remove(changeItem.previousArmor[i]);
+            objects[i].SetActive(true);
+            changeItem.previousArmor.Add(objects[i]);
+            yield return null;
         }
     }
 }
