@@ -5,17 +5,45 @@ using Photon.Pun;
 
 public class EquipedItens : MonoBehaviour
 {
-    public int level;
+    public int levelItem;
+    PhotonView PV;
     ChangeItem changeItem;
 
     private void Start()
+    { 
+        //PV = GetComponent<PhotonView>();
+        //PV.RPC("RPC_AddItensToEquiped", RpcTarget.AllBuffered, PV.ViewID, levelItem);
+        /*
+        switch (levelItem)
+        {
+            case 0:
+                gameObject.SetActive(true);
+                if (!changeItem.previousArmor.Contains(gameObject))
+                    changeItem.previousArmor.Add(gameObject);
+                break;
+            case 1:
+                if (!changeItem.previousArmor.Contains(gameObject))
+                    changeItem.armor1.Add(gameObject);
+                gameObject.SetActive(false);
+                break;
+            case 2:
+                if (!changeItem.previousArmor.Contains(gameObject))
+                    changeItem.armor2.Add(gameObject);
+                gameObject.SetActive(false);
+                break;
+        }*/
+    }
+}
+/*
+    [PunRPC]
+    void RPC_AddItensToEquiped(int ID, int level)
     {
-        changeItem = GetComponentInParent<ChangeItem>();
+        ChangeItem changeItem = PhotonView.Find(ID).gameObject.GetComponentInChildren<ChangeItem>();
         switch (level)
         {
             case 0:
                 gameObject.SetActive(true);
-                if(!changeItem.previousArmor.Contains(gameObject))
+                if (!changeItem.previousArmor.Contains(gameObject))
                     changeItem.previousArmor.Add(gameObject);
                 break;
             case 1:
@@ -29,5 +57,4 @@ public class EquipedItens : MonoBehaviour
                 gameObject.SetActive(false);
                 break;
         }
-    }
-}
+    }*/
