@@ -52,12 +52,14 @@ public class ItemCollider : MonoBehaviour
                 }
                 nearItens[i].GetComponent<Item>().pickupImage.gameObject.SetActive(false);
             }
-            ChangeItem(nearestItem);
+            if(nearestItem != null)
+                ChangeItem(nearestItem);
         }
     }
 
     void ChangeItem(Collider coll)
     {
+        print(coll);
         pickUpScript.pickUpItem = coll.GetComponent<Item>();
         coll.GetComponent<Item>().pickupImage.gameObject.SetActive(true);
         pickupImage = coll.GetComponent<Item>().pickupImage;

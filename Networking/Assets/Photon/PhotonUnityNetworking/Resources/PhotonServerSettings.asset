@@ -42,5 +42,6 @@ MonoBehaviour:
   - RPC_WarriorAttack
   - DestroyItem
   - RPC_DestroyItem
+  - RPC_ChangeArmorItens
   DisableAutoOpenWizard: 1
   ShowSettings: 1

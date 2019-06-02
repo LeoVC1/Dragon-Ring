@@ -11,9 +11,19 @@ public class Item : MonoBehaviour
     public GameObject pickupImage;
     public Image timerPickUp;
 
+    Vector3 startPosition;
+    Vector3 startRotation;
+
     private void Start()
     {
-        level = Random.Range(1, 3);
+        startPosition = pickupImage.GetComponent<RectTransform>().position;
+        startRotation = pickupImage.GetComponent<RectTransform>().localEulerAngles;
+    }
+
+    private void Update()
+    {
+        pickupImage.GetComponent<RectTransform>().position = startPosition;
+        pickupImage.GetComponent<RectTransform>().localEulerAngles = startRotation;
     }
 
     public void PickUp(PhotonView PV)

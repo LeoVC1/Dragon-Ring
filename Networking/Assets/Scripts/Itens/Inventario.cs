@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using System.IO;
 
 public class Inventario : MonoBehaviour
 {
@@ -9,17 +11,27 @@ public class Inventario : MonoBehaviour
 
     ChangeItem changeItem;
     AvatarSetup avatarSetup;
+    PhotonView PV;
 
     private void Start()
     {
+        PV = GetComponent<PhotonView>();
+        if (!PV.IsMine)
+            return;
         avatarSetup = GetComponent<AvatarSetup>();
         armorLevel = 0;
     }
 
     public void ChangeArmor(int level)
     {
+        PV.RPC("RPC_ChangeArmorItens", RpcTarget.All, level, PV.ViewID);
+    }
+
+    [PunRPC]
+    void RPC_ChangeArmorItens(int level, int ID)
+    {
         if (changeItem == null)
-            changeItem = avatarSetup.myCharacter.GetComponent<ChangeItem>();
+            changeItem = PhotonView.Find(ID).gameObject.GetComponentInChildren<ChangeItem>();
 
         switch (level)
         {
@@ -31,7 +43,6 @@ public class Inventario : MonoBehaviour
                     changeItem.armor1[i].SetActive(true);
                     changeItem.previousArmor.Add(changeItem.armor1[i]);
                 }
-                //StartCoroutine(EnableNewArmor(changeItem.armor1));
                 armorLevel = 1;
                 break;
             case 2:
@@ -42,21 +53,17 @@ public class Inventario : MonoBehaviour
                     changeItem.armor2[i].SetActive(true);
                     changeItem.previousArmor.Add(changeItem.armor2[i]);
                 }
-                //StartCoroutine(EnableNewArmor(changeItem.armor2));
+                if (armorLevel == 1)
+                {
+                    GameObject item = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "PeitoralFerro"), transform.position, transform.rotation);
+                    item.GetComponent<Rigidbody>().AddForce(changeItem.transform.forward * 250);
+                }
                 armorLevel = 2;
+                
                 break;
         }
+
     }
 
-    IEnumerator EnableNewArmor(List<GameObject> objects)
-    {
-        for(int i = objects.Count - 1; i >= 0; i--)
-        {
-            changeItem.previousArmor[i].SetActive(false);
-            changeItem.previousArmor.Remove(changeItem.previousArmor[i]);
-            objects[i].SetActive(true);
-            changeItem.previousArmor.Add(objects[i]);
-            yield return null;
-        }
-    }
+    
 }

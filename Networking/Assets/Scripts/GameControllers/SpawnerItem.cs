@@ -15,7 +15,16 @@ public class SpawnerItem : MonoBehaviour
 
     void SpawnRandomItem()
     {
-        instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "Item"), transform.position, transform.rotation);
+        int i = Random.Range(0, 2);
+        switch (i)
+        {
+            case 0:
+                instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "PeitoralFerro"), transform.position, transform.rotation);
+                break;
+            case 1:
+                instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "PeitoralOuro"), transform.position, transform.rotation);
+                break;
+        }
         instantiated.transform.parent = transform;
     }
 }
