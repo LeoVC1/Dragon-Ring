@@ -54,6 +54,7 @@ public class AvatarCombat : MonoBehaviour
                         PV.RPC("RPC_WarriorAttack", RpcTarget.All, 20f, ID);
                         Debug.Log(ID);
                         _lock = true;
+
                     }
                 }
             }

@@ -39,7 +39,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8367184586468249539}
-  - {fileID: 556}
   - {fileID: 5774807601217863905}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ebce9dd8ca4074b819f60bffcc6053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guns: {fileID: 1271}
+  guns: {fileID: 0}
   dead: 0
 --- !u!114 &1269
 MonoBehaviour:
@@ -157,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterValue: 0
   myCharacter: {fileID: 0}
+  myChangeItem: {fileID: 0}
   health: 100
   myCamera: {fileID: 2788480217675629888}
   myAL: {fileID: 0}
@@ -224,81 +224,6 @@ CapsuleCollider:
   m_Height: 1.8322012
   m_Direction: 1
   m_Center: {x: 0, y: 0.39732897, z: 0}
---- !u!1 &185
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 556}
-  - component: {fileID: 1271}
-  - component: {fileID: 1270}
-  m_Layer: 9
-  m_Name: GunSetup
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &556
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 185}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52, y: 0, z: 0.482}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 553}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b39a4b35320319c41bb9ce5d413f4a73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunValue: 0
-  myGun: {fileID: 0}
-  myGunVisible: {fileID: 0}
-  myGunInfo: {fileID: 0}
-  myGunLocal: {fileID: 0}
-  avatarCombat: {fileID: 1269}
-  allGuns:
-  - {fileID: 8797313927596020104, guid: 2e341d4b06e0d1e429982ffd7c433f20, type: 3}
-  - {fileID: 4559320309514787717, guid: bb436c132f7ce594aa6758e53e91d492, type: 3}
---- !u!114 &1270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &3372656969939433972
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +337,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5774807601217863905}
   - component: {fileID: 863847044901072910}
-  - component: {fileID: 7954862574877110976}
   - component: {fileID: 4436677531608048327}
   m_Layer: 11
   m_Name: ItemCollider
@@ -433,7 +357,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 553}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &863847044901072910
 MonoBehaviour:
@@ -450,28 +374,6 @@ MonoBehaviour:
   pickUpScript: {fileID: 3854453130902014550}
   nearItens: []
   nearestItem: {fileID: 0}
---- !u!114 &7954862574877110976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5859283416149074549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!65 &4436677531608048327
 BoxCollider:
   m_ObjectHideFlags: 0

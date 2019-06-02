@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class EquipedItens : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class EquipedItens : MonoBehaviour
 
     private void Start()
     {
+        if (!GetComponentInParent<PhotonView>().IsMine)
+            return;
         switch (level)
         {
             case 0:

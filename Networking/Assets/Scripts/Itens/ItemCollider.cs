@@ -20,7 +20,7 @@ public class ItemCollider : MonoBehaviour
 
     private void Start()
     {
-        PV = GetComponent<PhotonView>();
+        PV = GetComponentInParent<PhotonView>();
         if (!PV.IsMine)
             return;
         playerTarget = GetComponentInParent<AvatarSetup>().myCamera.transform;
@@ -59,7 +59,6 @@ public class ItemCollider : MonoBehaviour
 
     void ChangeItem(Collider coll)
     {
-        print(coll);
         pickUpScript.pickUpItem = coll.GetComponent<Item>();
         coll.GetComponent<Item>().pickupImage.gameObject.SetActive(true);
         pickupImage = coll.GetComponent<Item>().pickupImage;
