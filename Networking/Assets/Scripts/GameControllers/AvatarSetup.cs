@@ -11,7 +11,6 @@ public class AvatarSetup : MonoBehaviour
     PhotonView PV;
     public int characterValue;
     public GameObject myCharacter;
-    public ChangeItem myChangeItem;
 
     public float health;
 
@@ -42,7 +41,6 @@ public class AvatarSetup : MonoBehaviour
         myCharacter = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Characters", "WarriorPrefab"), transform.position - new Vector3(0, 0.5f, 0), transform.rotation);
         myCharacter.transform.parent = transform;
         animator = myCharacter.GetComponent<Animator>();
-        myChangeItem = myCharacter.GetComponent<ChangeItem>();
         myCamera.GetComponentInParent<CameraFollow>().CameraFollowObj = myCharacter.GetComponent<CharacterScript>().neckLocation.gameObject;
         
     }

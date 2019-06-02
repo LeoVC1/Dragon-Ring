@@ -35,7 +35,7 @@ public class Inventario : MonoBehaviour
         ChangeItem changeItem;
         Inventario destinyInventario;
         destinyAvatar = PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>();
-        changeItem = destinyAvatar.myChangeItem;
+        changeItem = destinyAvatar.GetComponentInChildren<ChangeItem>();
         destinyInventario = destinyAvatar.GetComponent<Inventario>();
 
         switch (level)
@@ -64,7 +64,6 @@ public class Inventario : MonoBehaviour
                     item.GetComponent<Rigidbody>().AddForce(changeItem.transform.forward * 250);
                 }
                 destinyInventario.armorLevel = 2;
-                
                 break;
         }
 

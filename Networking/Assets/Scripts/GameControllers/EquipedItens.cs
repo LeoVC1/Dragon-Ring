@@ -6,23 +6,26 @@ using Photon.Pun;
 public class EquipedItens : MonoBehaviour
 {
     public int level;
+    ChangeItem changeItem;
 
     private void Start()
     {
-        if (!GetComponentInParent<PhotonView>().IsMine)
-            return;
+        changeItem = GetComponentInParent<ChangeItem>();
         switch (level)
         {
             case 0:
                 gameObject.SetActive(true);
-                GetComponentInParent<ChangeItem>().previousArmor.Add(gameObject);
+                if(!changeItem.previousArmor.Contains(gameObject))
+                    changeItem.previousArmor.Add(gameObject);
                 break;
             case 1:
-                GetComponentInParent<ChangeItem>().armor1.Add(gameObject);
+                if (!changeItem.previousArmor.Contains(gameObject))
+                    changeItem.armor1.Add(gameObject);
                 gameObject.SetActive(false);
                 break;
             case 2:
-                GetComponentInParent<ChangeItem>().armor2.Add(gameObject);
+                if (!changeItem.previousArmor.Contains(gameObject))
+                    changeItem.armor2.Add(gameObject);
                 gameObject.SetActive(false);
                 break;
         }
