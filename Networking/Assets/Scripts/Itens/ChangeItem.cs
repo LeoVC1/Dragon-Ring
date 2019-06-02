@@ -9,4 +9,6 @@ public class ChangeItem : MonoBehaviour
     public List<GameObject> armor2 = new List<GameObject>();
     public List<GameObject> previousArmor = new List<GameObject>();
 
+
+
 }

@@ -25,17 +25,17 @@ public class Inventario : MonoBehaviour
     {
         if (!PV.IsMine)
             return;
-        PV.RPC("RPC_ChangeArmorItens", RpcTarget.All, level, PV.ViewID);
+        PV.RPC("RPC_ChangeArmorItens", RpcTarget.All, level, PV.ViewID, avatarSetup.myCharacterID);
     }
 
     [PunRPC]
-    void RPC_ChangeArmorItens(int level, int ID)
+    void RPC_ChangeArmorItens(int level, int ID, int myCharacterID)
     {
         AvatarSetup destinyAvatar;
         ChangeItem changeItem;
         Inventario destinyInventario;
         destinyAvatar = PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>();
-        changeItem = destinyAvatar.GetComponentInChildren<ChangeItem>();
+        changeItem = PhotonView.Find(myCharacterID).gameObject.GetComponent<ChangeItem>();
         destinyInventario = destinyAvatar.GetComponent<Inventario>();
 
         switch (level)

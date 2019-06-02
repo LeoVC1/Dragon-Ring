@@ -11,6 +11,7 @@ public class AvatarSetup : MonoBehaviour
     PhotonView PV;
     public int characterValue;
     public GameObject myCharacter;
+    public int myCharacterID;
 
     public float health;
 
@@ -26,7 +27,6 @@ public class AvatarSetup : MonoBehaviour
         if (PV.IsMine)
         {
             AddCharacter(0, "");
-            //PV.RPC("RPC_AddCharacter", RpcTarget.AllBuffered, PlayerInfo.PI.mySelectedCharacter, PlayerInfo.PI.myNick);
         }
         else
         {
@@ -42,6 +42,13 @@ public class AvatarSetup : MonoBehaviour
         myCharacter.transform.parent = transform;
         animator = myCharacter.GetComponent<Animator>();
         myCamera.GetComponentInParent<CameraFollow>().CameraFollowObj = myCharacter.GetComponent<CharacterScript>().neckLocation.gameObject;
-        
+        PV.RPC("RPC_AddCharacter", RpcTarget.AllBuffered, PV.ViewID, myCharacter.GetComponent<PhotonView>().ViewID);
     }
+
+    [PunRPC]
+    void RPC_AddCharacter(int myID, int myCharacterID)
+    {
+        PhotonView.Find(myID).GetComponent<AvatarSetup>().myCharacterID = myCharacterID;
+    }
+
 }
