@@ -11,6 +11,8 @@ public class AvatarSetup : MonoBehaviour
     PhotonView PV;
     public int characterValue;
     public GameObject myCharacter;
+    public ChangeItem myChangeItem;
+    public Inventario myInventario;
     public int myCharacterID;
 
     public float health;
@@ -48,7 +50,9 @@ public class AvatarSetup : MonoBehaviour
     [PunRPC]
     void RPC_AddCharacter(int myID, int myCharacterID)
     {
-        PhotonView.Find(myID).GetComponent<AvatarSetup>().myCharacterID = myCharacterID;
+        AvatarSetup aSetup = PhotonView.Find(myID).GetComponent<AvatarSetup>();
+        aSetup.myInventario = aSetup.GetComponent<Inventario>();
+        aSetup.myChangeItem = PhotonView.Find(myCharacterID).GetComponent<ChangeItem>();
     }
 
 }

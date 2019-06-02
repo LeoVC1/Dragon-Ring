@@ -156,6 +156,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterValue: 0
   myCharacter: {fileID: 0}
+  myChangeItem: {fileID: 0}
+  myInventario: {fileID: 0}
+  myCharacterID: 0
   health: 100
   myCamera: {fileID: 2788480217675629888}
   myAL: {fileID: 0}

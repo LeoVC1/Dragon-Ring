@@ -44,13 +44,19 @@ public class ItemCollider : MonoBehaviour
                 nearItens.Add(other);
             for(int i = 0; i < nearItens.Count; i++)
             {
-                float distance = Vector3.Distance(transform.position, nearItens[i].transform.position);
-                if (distance < nearestDistance || i == 0)
+                if (nearItens[i] == null)
+                    nearItens.Remove(nearItens[i]);
+                else
                 {
-                    nearestDistance = distance;
-                    nearestItem = nearItens[i];
+                    float distance = Vector3.Distance(transform.position, nearItens[i].transform.position);
+                    if (distance < nearestDistance || i == 0)
+                    {
+                        nearestDistance = distance;
+                        nearestItem = nearItens[i];
+                    }
+                    nearItens[i].GetComponent<Item>().pickupImage.gameObject.SetActive(false);
                 }
-                nearItens[i].GetComponent<Item>().pickupImage.gameObject.SetActive(false);
+                
             }
             if(nearestItem != null)
                 ChangeItem(nearestItem);

@@ -32,7 +32,7 @@ public class PlayerItemPickUp : MonoBehaviour
 
         if(pickUpItem != null)
         {
-            Teste();
+            Locker();
         }
         else
         {
@@ -70,28 +70,7 @@ public class PlayerItemPickUp : MonoBehaviour
             pickUpValue = 0;
         }
     }
-    /*
-    void SelectItem()
-    {
-        Ray ray = new Ray(transform.position - new Vector3(0, offset, 0), avatarSetup.myCharacter.transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction, Color.yellow);
-        if(Physics.Raycast(ray, out RaycastHit hit, 1, mask))
-        {
-            pickUpItem = hit.collider.GetComponent<Item>();
-            pickupImage = hit.collider.GetComponent<Item>().pickupImage;
-            pickupImage.SetActive(true);
-            _lock = true;
-        }
-        else if(_lock == true)
-        {
-            if (pickupImage != null)
-                pickupImage.SetActive(false);
-            pickupImage = null;
-            _lock = false;
-        }
-    }*/
-
-    public void Teste()
+    public void Locker()
     {
         _lock = true;
         OnItem();
