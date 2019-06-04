@@ -10,10 +10,10 @@ public class ChangeItem : MonoBehaviour
     public List<GameObject> armor1 = new List<GameObject>();
     public List<GameObject> armor2 = new List<GameObject>();
     public List<GameObject> previousArmor = new List<GameObject>();
-
+    public AvatarSetup mySetup;
     public void ChangeArmor(int level)
     {
-        int armorLevel = GetComponentInParent<Inventario>().armorLevel;
+        int armorLevel = mySetup.myInventario.armorLevel;
         switch (level)
         {
             case 1:

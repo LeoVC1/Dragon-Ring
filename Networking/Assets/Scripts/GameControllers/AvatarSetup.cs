@@ -53,6 +53,7 @@ public class AvatarSetup : MonoBehaviour
         AvatarSetup aSetup = PhotonView.Find(myID).GetComponent<AvatarSetup>();
         aSetup.myInventario = aSetup.GetComponent<Inventario>();
         aSetup.myChangeItem = PhotonView.Find(myCharacterID).GetComponent<ChangeItem>();
+        aSetup.myChangeItem.mySetup = this;
     }
 
 }
