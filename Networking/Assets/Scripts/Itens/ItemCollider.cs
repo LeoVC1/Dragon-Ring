@@ -40,7 +40,8 @@ public class ItemCollider : MonoBehaviour
             return;
         if (other.CompareTag("Item"))
         {
-            if(!nearItens.Contains(other) && inventario.armorLevel < other.GetComponent<Item>().level)
+            if(!nearItens.Contains(other) && (inventario.armorLevel < other.GetComponent<Item>().level && other.GetComponent<Item>().itemType == Itens.ARMOR) 
+                                          ||  (inventario.helmetLevel < other.GetComponent<Item>().level && other.GetComponent<Item>().itemType == Itens.HELMET))
                 nearItens.Add(other);
             for(int i = 0; i < nearItens.Count; i++)
             {

@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
             isRunning = false;
             runSpeed = 1;
             if(stamina < 100)
-                stamina += 10 * Time.deltaTime;
+                stamina += 20 * Time.deltaTime;
             if(isBreathing == false && stamina < 0)
             {
                 isBreathing = true;

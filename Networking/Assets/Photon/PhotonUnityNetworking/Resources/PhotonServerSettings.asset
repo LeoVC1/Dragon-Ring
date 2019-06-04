@@ -44,5 +44,6 @@ MonoBehaviour:
   - RPC_DestroyItem
   - RPC_ChangeArmorItens
   - RPC_AddItensToEquiped
+  - RPC_ChangeHelmet
   DisableAutoOpenWizard: 1
   ShowSettings: 1

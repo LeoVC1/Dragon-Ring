@@ -34,5 +34,18 @@ public class Inventario : MonoBehaviour
         PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>().myChangeItem.ChangeArmor(level);
     }
 
+    public void ChangeHelmet(int level)
+    {
+        if (!PV.IsMine)
+            return;
+        PV.RPC("RPC_ChangeHelmet", RpcTarget.All, level, PV.ViewID);
+    }
+
+    [PunRPC]
+    void RPC_ChangeHelmet(int level, int ID)
+    {
+        PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>().myChangeItem.ChangeHelmet(level);
+    }
+
     
 }

@@ -59,7 +59,16 @@ public class PlayerItemPickUp : MonoBehaviour
             {
                 GetComponentInChildren<ItemCollider>().nearItens.Remove(pickUpItem.GetComponent<Collider>());
                 pickUpItem.PickUp(PV);
-                inventario.ChangeArmor(pickUpItem.level);
+                switch (pickUpItem.itemType)
+                {
+                    case Itens.ARMOR:
+                        inventario.ChangeArmor(pickUpItem.level);
+                        break;
+                    case Itens.HELMET:
+                        inventario.ChangeHelmet(pickUpItem.level);
+                        break;
+
+                }
                 pickUpItem = null;
                 pickUpValue = 0;
             }
