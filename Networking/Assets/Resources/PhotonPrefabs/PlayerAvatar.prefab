@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8146f3f45c730dc4294d8d6543612d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camPrefab: {fileID: 6019668102411868832, guid: 82cee99f038e56548b79c3b300501067,
+  camPrefab: {fileID: 2419434676915322036, guid: 2e0af8bdd0227664b983801b365f507a,
     type: 3}
   arrowImage: {fileID: 0}
 --- !u!54 &1152
