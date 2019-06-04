@@ -48,7 +48,7 @@ public class ChangeItem : MonoBehaviour
                 }
                 break;
         }
-        GetComponentInParent<Inventario>().armorLevel = armorLevel;
+        mySetup.myInventario.armorLevel = armorLevel;
     }
 
 }
