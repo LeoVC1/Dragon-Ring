@@ -6,6 +6,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
@@ -13,7 +14,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private PhotonView PV;
     public int multiplayerScene;
     private int currentScene;
-    public Text roomName;
+    public TextMeshProUGUI roomName;
 
     private void Awake()
     {
