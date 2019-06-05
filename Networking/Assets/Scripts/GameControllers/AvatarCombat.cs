@@ -11,6 +11,7 @@ public class AvatarCombat : MonoBehaviour
     AvatarSetup avatarSetup;
     PlayerMovement movementScript;
 
+    public GameObject hitParticle;
     public Transform rayOrigin;
 
     public Image healthBarDisplay;
@@ -51,7 +52,7 @@ public class AvatarCombat : MonoBehaviour
                     if (hit.transform.tag == "Player" && hit.collider != GetComponent<CapsuleCollider>())
                     {
                         int ID = hit.collider.GetComponent<PhotonView>().ViewID;
-                        PV.RPC("RPC_WarriorAttack", RpcTarget.All, 20f, ID);
+                        PV.RPC("RPC_WarriorAttack", RpcTarget.All, 20f, ID, hit.point.x, hit.point.y, hit.point.z);
                         Debug.Log(ID);
                         _lock = true;
 
@@ -62,8 +63,9 @@ public class AvatarCombat : MonoBehaviour
     }
 
     [PunRPC]
-    void RPC_WarriorAttack(float damage, int ID)
+    void RPC_WarriorAttack(float damage, int ID, float x, float y, float z)
     {
         PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>().health -= damage;
+        Instantiate(hitParticle, new Vector3(x, y, z), Quaternion.identity);
     }
 }

@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d395ac52e5b6a6947a222095fe63efea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitParticle: {fileID: 360649754, guid: 2779f265885e1564a81bb085951fe081, type: 3}
   rayOrigin: {fileID: 0}
   healthBarDisplay: {fileID: 0}
   _lock: 0
