@@ -6,13 +6,19 @@ using System.IO;
 
 public class ChangeItem : MonoBehaviour
 {
-    [Header("Objetos da Armadura:")]
+    [Header("Helmet:")]
     public GameObject helmet1;
     public GameObject helmet2;
     public GameObject previousHelmet;
+    [Header("Armor:")]
     public List<GameObject> armor1 = new List<GameObject>();
     public List<GameObject> armor2 = new List<GameObject>();
     public List<GameObject> previousArmor = new List<GameObject>();
+    [Header("Arma:")]
+    public GameObject[] weapons1;
+    public GameObject[] weapons2;
+    public GameObject[] previousWeapons;
+
     public AvatarSetup mySetup;
     public void ChangeArmor(int level)
     {
@@ -86,4 +92,40 @@ public class ChangeItem : MonoBehaviour
         mySetup.myInventario.helmetLevel = helmetLevel;
     }
 
+    public void ChangeWeapon(int level)
+    {
+        int weaponLevel = mySetup.myInventario.weaponLevel;
+        switch (level)
+        {
+            case 1:
+                if (weaponLevel < 1)
+                {
+                    for(int i = 0; i < 2; i++)
+                    {
+                        previousWeapons[i].SetActive(false);
+                        weapons1[i].SetActive(true);
+                    }
+                    previousWeapons = weapons1;
+                }
+                break;
+            case 2:
+                if (weaponLevel < 2)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        previousWeapons[i].SetActive(false);
+                        weapons2[i].SetActive(true);
+                    }
+                    previousWeapons = weapons2;
+                    if (weaponLevel == 1)
+                    {
+                        GameObject item = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "WeaponFerro"), transform.position + Vector3.up, transform.rotation);
+                        item.GetComponent<Rigidbody>().AddForce(transform.forward * 300);
+                    }
+                    weaponLevel = 2;
+                }
+                break;
+        }
+        mySetup.myInventario.weaponLevel = weaponLevel;
+    }
 }

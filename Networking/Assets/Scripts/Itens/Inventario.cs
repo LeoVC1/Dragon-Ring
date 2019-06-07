@@ -8,6 +8,7 @@ public class Inventario : MonoBehaviour
 {
     public int armorLevel;
     public int helmetLevel;
+    public int weaponLevel;
 
     AvatarSetup avatarSetup;
     PhotonView PV;
@@ -19,7 +20,9 @@ public class Inventario : MonoBehaviour
             return;
         avatarSetup = GetComponent<AvatarSetup>();
         armorLevel = 0;
-    }
+        helmetLevel = 0;
+        weaponLevel = 0;
+}
 
     public void ChangeArmor(int level)
     {
@@ -47,5 +50,16 @@ public class Inventario : MonoBehaviour
         PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>().myChangeItem.ChangeHelmet(level);
     }
 
-    
+    public void ChangeWeapon(int level)
+    {
+        if (!PV.IsMine)
+            return;
+        PV.RPC("RPC_ChangeWeapon", RpcTarget.All, level, PV.ViewID);
+    }
+
+    [PunRPC]
+    void RPC_ChangeWeapon(int level, int ID)
+    {
+        PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>().myChangeItem.ChangeWeapon(level);
+    }
 }

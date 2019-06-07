@@ -8,7 +8,8 @@ using System.IO;
 public enum Itens
 {
     HELMET,
-    ARMOR
+    ARMOR,
+    WEAPON
 }
 
 public class Item : MonoBehaviour

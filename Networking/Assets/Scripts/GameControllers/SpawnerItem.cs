@@ -33,4 +33,9 @@ public class SpawnerItem : MonoBehaviour
         }
         instantiated.transform.parent = transform;
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, 0.3f);
+    }
 }
