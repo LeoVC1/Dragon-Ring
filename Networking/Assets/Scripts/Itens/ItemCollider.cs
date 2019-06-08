@@ -40,8 +40,12 @@ public class ItemCollider : MonoBehaviour
             return;
         if (other.CompareTag("Item"))
         {
-            if ((!nearItens.Contains(other)) && ((inventario.armorLevel < other.GetComponent<Item>().level && other.GetComponent<Item>().itemType == Itens.ARMOR) 
-                                          ||  (inventario.helmetLevel < other.GetComponent<Item>().level && other.GetComponent<Item>().itemType == Itens.HELMET)))
+            Item otherItem = other.GetComponent<Item>();
+            float itemLevel = otherItem.level;
+            Itens item = otherItem.itemType;
+            if ((!nearItens.Contains(other)) && ((inventario.armorLevel < itemLevel && item == Itens.ARMOR) 
+                                             ||  (inventario.helmetLevel < itemLevel && item == Itens.HELMET)
+                                             || (inventario.weaponLevel < itemLevel && item == Itens.WEAPON)))
             {
                 nearItens.Add(other);
             } 
@@ -68,9 +72,10 @@ public class ItemCollider : MonoBehaviour
 
     void ChangeItem(Collider coll)
     {
-        pickUpScript.pickUpItem = coll.GetComponent<Item>();
-        coll.GetComponent<Item>().pickupImage.gameObject.SetActive(true);
-        pickupImage = coll.GetComponent<Item>().pickupImage;
+        Item collItem = coll.GetComponent<Item>();
+        pickUpScript.pickUpItem = collItem;
+        collItem.pickupImage.gameObject.SetActive(true);
+        pickupImage = collItem.pickupImage;
     }
 
     private void OnTriggerExit(Collider other)
