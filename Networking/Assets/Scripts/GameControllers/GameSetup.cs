@@ -16,8 +16,6 @@ public class GameSetup : MonoBehaviour
     public TextMeshProUGUI playerHealthValue;
     public TextMeshProUGUI playerMaxHealthValue;
 
-    public GameObject hitMarkImage;
-
     public GameObject escButtons;
 
     public RawImage minimapImage;

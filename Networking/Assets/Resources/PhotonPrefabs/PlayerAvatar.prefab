@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d395ac52e5b6a6947a222095fe63efea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitMarkPrefab: {fileID: 9180965575390957279, guid: 8c601973e23095d41a0ce55c22dd7f8c,
+    type: 3}
   hitParticle: {fileID: 1000012909287652, guid: abb9f519b142e304d9c45b56afa768bc,
     type: 3}
   hitPropWood: {fileID: 1000011190285628, guid: beb3acff7ab73944fb8f470f24d74ed3,
@@ -162,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc8cce90de08482b953e2229682deeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 0
+  HP: 100
   MaxHP: 100
   HPParticle: {fileID: 100000, guid: 57ff52a6b9d134c9689be872547ab590, type: 3}
   DefaultForce: {x: 0, y: 1, z: 0}

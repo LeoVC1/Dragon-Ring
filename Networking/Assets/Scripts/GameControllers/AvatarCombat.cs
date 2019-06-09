@@ -12,6 +12,7 @@ public class AvatarCombat : MonoBehaviour
     PlayerMovement movementScript;
     HPScript HPScript;
 
+    public GameObject hitMarkPrefab;
     public GameObject hitParticle;
     public GameObject hitPropWood;
     public GameObject hitPropStone;
@@ -55,8 +56,9 @@ public class AvatarCombat : MonoBehaviour
                     {
                         int ID = hit.collider.GetComponent<PhotonView>().ViewID;
                         Vector3 direction = hit.point - hit.collider.transform.position;
-                        StartCoroutine(ShowHitMark());
-                        PV.RPC("RPC_WarriorAttack", RpcTarget.All, damage, ID, direction.x, direction.y, direction.z);
+                        GameObject hitmark = Instantiate(hitMarkPrefab, hit.collider.transform.position, Quaternion.identity);
+                        Destroy(hitmark, 0.5f);
+                        PV.RPC("RPC_WarriorAttack", RpcTarget.All, damage, ID, hit.collider.transform.position.x, hit.collider.transform.position.y, hit.collider.transform.position.z);
                         _lock = true;
                     }
                     else if(hit.transform.tag == "WoodProps" || hit.transform.tag == "StoneProps")
@@ -77,7 +79,7 @@ public class AvatarCombat : MonoBehaviour
     [PunRPC]
     void RPC_WarriorAttack(float damage, int ID, float x, float y, float z)
     {
-        PhotonView.Find(ID).gameObject.GetComponent<HPScript>().ChangeHP(-damage, transform.position, Vector3.up, 100f);
+        PhotonView.Find(ID).gameObject.GetComponent<HPScript>().ChangeHP(-damage, new Vector3(x, y + 1, z), Vector3.up, 100f);
         GameObject particle = Instantiate(hitParticle, new Vector3(x, y, z), Quaternion.identity);
         Destroy(particle, 0.5f);
     }
@@ -100,10 +102,4 @@ public class AvatarCombat : MonoBehaviour
         
     }
 
-    IEnumerator ShowHitMark()
-    {
-        GameSetup.GS.hitMarkImage.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-        GameSetup.GS.hitMarkImage.SetActive(false);
-    }
 }
