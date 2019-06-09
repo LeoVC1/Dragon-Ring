@@ -89,9 +89,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d395ac52e5b6a6947a222095fe63efea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitParticle: {fileID: 360649754, guid: 2779f265885e1564a81bb085951fe081, type: 3}
+  hitParticle: {fileID: 1000012909287652, guid: abb9f519b142e304d9c45b56afa768bc,
+    type: 3}
+  hitPropWood: {fileID: 1000011190285628, guid: beb3acff7ab73944fb8f470f24d74ed3,
+    type: 3}
+  hitPropStone: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980,
+    type: 3}
   rayOrigin: {fileID: 0}
-  healthBarDisplay: {fileID: 0}
+  damage: 20
   _lock: 0
 --- !u!114 &1266
 MonoBehaviour:
@@ -158,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 0
+  MaxHP: 100
   HPParticle: {fileID: 100000, guid: 57ff52a6b9d134c9689be872547ab590, type: 3}
   DefaultForce: {x: 0, y: 1, z: 0}
   DefaultForceScatter: 0.5
@@ -177,8 +183,11 @@ MonoBehaviour:
   myCharacter: {fileID: 0}
   myChangeItem: {fileID: 0}
   myInventario: {fileID: 0}
+  myHPScript: {fileID: 6883183679400053353}
+  myAvatarCombat: {fileID: 1269}
   myCharacterID: 0
   health: 100
+  maxHealth: 0
   myCamera: {fileID: 2788480217675629888}
   myAL: {fileID: 0}
   animator: {fileID: 0}

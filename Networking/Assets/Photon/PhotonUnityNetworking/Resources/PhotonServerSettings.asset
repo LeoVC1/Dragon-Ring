@@ -46,5 +46,6 @@ MonoBehaviour:
   - RPC_AddItensToEquiped
   - RPC_ChangeHelmet
   - RPC_ChangeWeapon
+  - RPC_WarriorAttackProp
   DisableAutoOpenWizard: 1
   ShowSettings: 1

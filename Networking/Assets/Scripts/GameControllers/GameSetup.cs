@@ -13,6 +13,11 @@ public class GameSetup : MonoBehaviour
     public Image playerHealthBar;
     public Image playerManaBar;
 
+    public TextMeshProUGUI playerHealthValue;
+    public TextMeshProUGUI playerMaxHealthValue;
+
+    public GameObject hitMarkImage;
+
     public GameObject escButtons;
 
     public RawImage minimapImage;

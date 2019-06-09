@@ -13,9 +13,12 @@ public class AvatarSetup : MonoBehaviour
     public GameObject myCharacter;
     public ChangeItem myChangeItem;
     public Inventario myInventario;
+    public HPScript myHPScript;
+    public AvatarCombat myAvatarCombat;
     public int myCharacterID;
 
     public float health;
+    public float maxHealth;
 
     public Camera myCamera;
     public AudioListener myAL;
@@ -34,6 +37,26 @@ public class AvatarSetup : MonoBehaviour
         {
             Destroy(myCamera);
             Destroy(myAL);
+        }
+    }
+
+    public void ChangeHP(float value)
+    {
+        health = value;
+        if (PV.IsMine)
+        {
+            GameSetup.GS.playerHealthBar.fillAmount = health / maxHealth;
+            GameSetup.GS.playerHealthValue.text = health.ToString();
+        }
+    }
+
+    public void ChangeMaxHP(float value)
+    {
+        maxHealth = value;
+        if (PV.IsMine)
+        {
+            GameSetup.GS.playerHealthBar.fillAmount = health / maxHealth;
+            GameSetup.GS.playerMaxHealthValue.text = maxHealth.ToString();
         }
     }
 

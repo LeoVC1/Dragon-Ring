@@ -7,27 +7,43 @@ using TMPro;
 public class HPScript : MonoBehaviour {
 
 	//the current HP of the character/gameobject
-	public float HP; 
+	public float HP = 100;
+    public float MaxHP = 100;
 
-	//the HP Particle
-	public GameObject HPParticle;
+    //the HP Particle
+    public GameObject HPParticle;
 
 	//Default Forces
 	public Vector3 DefaultForce = new Vector3(0f,1f,0f);
 	public float DefaultForceScatter = 0.5f;
 
-	//Change the HP without an effect
-	public void ChangeHP(float Delta)
+    private AvatarSetup avatarSetup;
+
+    private void Start()
+    {
+        avatarSetup = GetComponent<AvatarSetup>();
+    }
+
+    //Change the HP without an effect
+    public void ChangeHPValue(float Delta)
 	{
 		HP = HP + Delta;
-	}
+        avatarSetup.ChangeHP(HP);
+    }
 
-	//Change the HP and Instantiates an HP Particle with a Custom Force and Color
-	public void ChangeHP(float Delta,Vector3 Position, Vector3 Force, float ForceScatter, Color ThisColor)
-	{
-		HP = HP + Delta;
+    public void ChangeMaxHPValue(float Delta)
+    {
+        MaxHP += Delta;
+        avatarSetup.ChangeMaxHP(MaxHP);
+    }
 
-		GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
+    //Change the HP and Instantiates an HP Particle with a Custom Force and Color
+    public void ChangeHP(float Delta,Vector3 Position, Vector3 Force, float ForceScatter, Color ThisColor)
+    { 
+        ChangeHPValue(Delta);
+
+
+        GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
 
         TextMeshPro TM = NewHPP.GetComponent<HPParticleScript>().textMeshPro;
@@ -49,9 +65,9 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with a Custom Force
 	public void ChangeHP(float Delta,Vector3 Position, Vector3 Force, float ForceScatter)
 	{
-		HP = HP + Delta;
-		
-		GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
+        ChangeHPValue(Delta);
+
+        GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
 
         TextMeshPro TM = NewHPP.GetComponent<HPParticleScript>().textMeshPro;
@@ -73,9 +89,9 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with a Custom Color
 	public void ChangeHP(float Delta,Vector3 Position, Color ThisColor)
 	{
-		HP = HP + Delta;
-		
-		GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
+        ChangeHPValue(Delta);
+
+        GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
 
         TextMeshPro TM = NewHPP.GetComponent<HPParticleScript>().textMeshPro;
@@ -97,9 +113,9 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with default force and color
 	public void ChangeHP(float Delta,Vector3 Position)
 	{
-		HP = HP + Delta;
-		
-		GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
+        ChangeHPValue(Delta);
+
+        GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
 
         TextMeshPro TM = NewHPP.GetComponent<HPParticleScript>().textMeshPro;
@@ -122,9 +138,9 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with Custom Text
 	public void ChangeHP(float Delta,Vector3 Position, string text)
 	{
-		HP = HP + Delta;
-		
-		GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
+        ChangeHPValue(Delta);
+
+        GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
 
         TextMeshPro TM = NewHPP.GetComponent<HPParticleScript>().textMeshPro;
@@ -146,9 +162,9 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with Custom Text and Force,
 	public void ChangeHP(float Delta,Vector3 Position, Vector3 Force, float ForceScatter, string text)
 	{
-		HP = HP + Delta;
-		
-		GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
+        ChangeHPValue(Delta);
+
+        GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
 
         TextMeshPro TM = NewHPP.GetComponent<HPParticleScript>().textMeshPro;
@@ -170,9 +186,9 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with Custom Text, Force and Color
 	public void ChangeHP(float Delta,Vector3 Position, Vector3 Force, float ForceScatter, Color ThisColor, string text)
 	{
-		HP = HP + Delta;
-		
-		GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
+        ChangeHPValue(Delta);
+
+        GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
 
         TextMeshPro TM = NewHPP.GetComponent<HPParticleScript>().textMeshPro;
@@ -185,9 +201,9 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with Custom Text and Color
 	public void ChangeHP(float Delta,Vector3 Position, Color ThisColor, string text)
 	{
-		HP = HP + Delta;
-		
-		GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
+        ChangeHPValue(Delta);
+
+        GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
 
         TextMeshPro TM = NewHPP.GetComponent<HPParticleScript>().textMeshPro;

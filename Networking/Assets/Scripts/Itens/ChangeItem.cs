@@ -25,16 +25,10 @@ public class ChangeItem : MonoBehaviour
     public bool change = false;
     public int equipedItens = 0;
     private int previousEquipedItens = 0;
+    public float healthPerEquip = 10;
+    public float damagePerEquip = 10; 
 
     public AvatarSetup mySetup;
-
-    private void FixedUpdate()
-    {
-        //if(change == true && equipedItens == previousEquipedItens / 3)
-        //{
-        //    change = false;
-        //}
-    }
 
     public void ChangeArmor(int level)
     {
@@ -45,8 +39,8 @@ public class ChangeItem : MonoBehaviour
         }
 
         armorLevel = level;
-        previousEquipedItens = equipedItens;
-        change = true;
+
+        mySetup.myHPScript.ChangeMaxHPValue(healthPerEquip * armorLevel);
 
         mySetup.myInventario.armorLevel = armorLevel;
     }
@@ -60,8 +54,8 @@ public class ChangeItem : MonoBehaviour
         }
 
         helmetLevel = level;
-        previousEquipedItens = equipedItens;
-        change = true;
+
+        mySetup.myHPScript.ChangeMaxHPValue(healthPerEquip * helmetLevel);
 
         mySetup.myInventario.helmetLevel = helmetLevel;
     }
@@ -75,8 +69,8 @@ public class ChangeItem : MonoBehaviour
         }
 
         weaponLevel = level;
-        previousEquipedItens = equipedItens;
-        change = true;
+
+        mySetup.myAvatarCombat.ChangeDamage(damagePerEquip * weaponLevel);
 
         mySetup.myInventario.weaponLevel = weaponLevel;
     }

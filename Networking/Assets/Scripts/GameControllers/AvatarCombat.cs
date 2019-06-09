@@ -13,9 +13,10 @@ public class AvatarCombat : MonoBehaviour
     HPScript HPScript;
 
     public GameObject hitParticle;
+    public GameObject hitPropWood;
+    public GameObject hitPropStone;
     public Transform rayOrigin;
-
-    public Image healthBarDisplay;
+    public float damage = 20;
 
     public bool _lock;
 
@@ -26,7 +27,6 @@ public class AvatarCombat : MonoBehaviour
         {
             return;
         }
-        healthBarDisplay = GameSetup.GS.playerHealthBar;
         avatarSetup = GetComponent<AvatarSetup>();
         movementScript = GetComponent<PlayerMovement>();
         HPScript = GetComponent<HPScript>();
@@ -40,7 +40,6 @@ public class AvatarCombat : MonoBehaviour
             return;
         }
 
-        healthBarDisplay.fillAmount = avatarSetup.health / 100f;
         if (movementScript.isAttacking && _lock == false)
         {
             rayOrigin = avatarSetup.myCharacter.GetComponent<CharacterScript>().swordLocation;
@@ -56,13 +55,23 @@ public class AvatarCombat : MonoBehaviour
                     {
                         int ID = hit.collider.GetComponent<PhotonView>().ViewID;
                         Vector3 direction = hit.point - hit.collider.transform.position;
-                        PV.RPC("RPC_WarriorAttack", RpcTarget.All, 20f, ID, direction.x, direction.y, direction.z);
+                        StartCoroutine(ShowHitMark());
+                        PV.RPC("RPC_WarriorAttack", RpcTarget.All, damage, ID, direction.x, direction.y, direction.z);
                         _lock = true;
-
+                    }
+                    else if(hit.transform.tag == "WoodProps" || hit.transform.tag == "StoneProps")
+                    {
+                        PV.RPC("RPC_WarriorAttackProp", RpcTarget.All, hit.point.x, hit.point.y, hit.point.z, hit.transform.tag);
+                        _lock = true;
                     }
                 }
             }
         }
+    }
+
+    public void ChangeDamage(float value)
+    {
+        damage += value;
     }
 
     [PunRPC]
@@ -71,5 +80,30 @@ public class AvatarCombat : MonoBehaviour
         PhotonView.Find(ID).gameObject.GetComponent<HPScript>().ChangeHP(-damage, transform.position, Vector3.up, 100f);
         GameObject particle = Instantiate(hitParticle, new Vector3(x, y, z), Quaternion.identity);
         Destroy(particle, 0.5f);
+    }
+
+    [PunRPC]
+    void RPC_WarriorAttackProp(float x, float y, float z, string type)
+    {
+        GameObject particle;
+        switch (type)
+        {
+            case "WoodProps":
+                particle = Instantiate(hitPropWood, new Vector3(x, y, z), Quaternion.identity);
+                Destroy(particle, 0.5f);
+                break;
+            case "StoneProps":
+                particle = Instantiate(hitPropStone, new Vector3(x, y, z), Quaternion.identity);
+                Destroy(particle, 0.5f);
+                break;
+        }
+        
+    }
+
+    IEnumerator ShowHitMark()
+    {
+        GameSetup.GS.hitMarkImage.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        GameSetup.GS.hitMarkImage.SetActive(false);
     }
 }

@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Item
   - Ground
+  - Props
+  - Effect
+  - WoodProps
+  - StoneProps
   layers:
   - Default
   - TransparentFX

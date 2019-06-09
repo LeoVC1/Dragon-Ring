@@ -18,27 +18,6 @@ public class SpawnerItem : MonoBehaviour
     void SpawnRandomItem()
     {
         instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", itensName[Random.Range(0, itensName.Length)]), transform.position, Quaternion.identity);
-        //switch (i)
-        //{
-        //    case 0:
-        //        instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "PeitoralFerro"), transform.position, transform.rotation);
-        //        break;
-        //    case 1:
-        //        instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "PeitoralOuro"), transform.position, transform.rotation);
-        //        break;
-        //    case 2:
-        //        instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "HelmetFerro"), transform.position, transform.rotation);
-        //        break;
-        //    case 3:
-        //        instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "HelmetOuro"), transform.position, transform.rotation);
-        //        break;
-        //    case 4:
-        //        instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "WeaponFerro"), transform.position, transform.rotation);
-        //        break;
-        //    case 5:
-        //        instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "WeaponOuro"), transform.position, transform.rotation);
-        //        break;
-        //}
         instantiated.transform.parent = transform;
     }
 
