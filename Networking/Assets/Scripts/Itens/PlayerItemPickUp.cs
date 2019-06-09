@@ -67,6 +67,9 @@ public class PlayerItemPickUp : MonoBehaviour
                     case Itens.HELMET:
                         inventario.ChangeHelmet(pickUpItem.level);
                         break;
+                    case Itens.WEAPON:
+                        inventario.ChangeWeapon(pickUpItem.level);
+                        break;
 
                 }
                 pickUpItem = null;

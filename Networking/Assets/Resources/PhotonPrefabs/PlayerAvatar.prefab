@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1266}
   - component: {fileID: 2641236829368089143}
   - component: {fileID: 1265}
+  - component: {fileID: 6883183679400053353}
   - component: {fileID: 1267}
   - component: {fileID: 3854453130902014550}
   - component: {fileID: 5650104462317382666}
@@ -144,6 +145,22 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &6883183679400053353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bc8cce90de08482b953e2229682deeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 0
+  HPParticle: {fileID: 100000, guid: 57ff52a6b9d134c9689be872547ab590, type: 3}
+  DefaultForce: {x: 0, y: 1, z: 0}
+  DefaultForceScatter: 0.5
 --- !u!114 &1267
 MonoBehaviour:
   m_ObjectHideFlags: 0

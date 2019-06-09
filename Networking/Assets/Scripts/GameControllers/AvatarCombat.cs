@@ -10,6 +10,7 @@ public class AvatarCombat : MonoBehaviour
     PhotonView PV;
     AvatarSetup avatarSetup;
     PlayerMovement movementScript;
+    HPScript HPScript;
 
     public GameObject hitParticle;
     public Transform rayOrigin;
@@ -28,6 +29,7 @@ public class AvatarCombat : MonoBehaviour
         healthBarDisplay = GameSetup.GS.playerHealthBar;
         avatarSetup = GetComponent<AvatarSetup>();
         movementScript = GetComponent<PlayerMovement>();
+        HPScript = GetComponent<HPScript>();
     }
 
     // Update is called once per frame
@@ -37,6 +39,7 @@ public class AvatarCombat : MonoBehaviour
         {
             return;
         }
+
         healthBarDisplay.fillAmount = avatarSetup.health / 100f;
         if (movementScript.isAttacking && _lock == false)
         {
@@ -47,13 +50,13 @@ public class AvatarCombat : MonoBehaviour
             hits = Physics.RaycastAll(ray, 1f);
             if (hits.Length > 0)
             {
-                foreach(var hit in hits)
+                foreach (var hit in hits)
                 {
                     if (hit.transform.tag == "Player" && hit.collider != GetComponent<CapsuleCollider>())
                     {
                         int ID = hit.collider.GetComponent<PhotonView>().ViewID;
-                        PV.RPC("RPC_WarriorAttack", RpcTarget.All, 20f, ID, hit.point.x, hit.point.y, hit.point.z);
-                        Debug.Log(ID);
+                        Vector3 direction = hit.point - hit.collider.transform.position;
+                        PV.RPC("RPC_WarriorAttack", RpcTarget.All, 20f, ID, direction.x, direction.y, direction.z);
                         _lock = true;
 
                     }
@@ -65,7 +68,8 @@ public class AvatarCombat : MonoBehaviour
     [PunRPC]
     void RPC_WarriorAttack(float damage, int ID, float x, float y, float z)
     {
-        PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>().health -= damage;
-        Instantiate(hitParticle, new Vector3(x, y, z), Quaternion.identity);
+        PhotonView.Find(ID).gameObject.GetComponent<HPScript>().ChangeHP(-damage, transform.position, Vector3.up, 100f);
+        GameObject particle = Instantiate(hitParticle, new Vector3(x, y, z), Quaternion.identity);
+        Destroy(particle, 0.5f);
     }
 }

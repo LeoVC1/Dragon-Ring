@@ -31,7 +31,6 @@ public class ItemCollider : MonoBehaviour
     {
         if (!PV.IsMine)
             return;
-        ImageFollowCamera();
     }
 
     private void OnTriggerStay(Collider other)
@@ -75,6 +74,7 @@ public class ItemCollider : MonoBehaviour
         Item collItem = coll.GetComponent<Item>();
         pickUpScript.pickUpItem = collItem;
         collItem.pickupImage.gameObject.SetActive(true);
+        collItem.faceCameraScript.Target = playerTarget.gameObject;
         pickupImage = collItem.pickupImage;
     }
 
@@ -93,14 +93,6 @@ public class ItemCollider : MonoBehaviour
             nearestItem = null;
             pickUpScript.pickUpItem = null;
         }
-    }
-
-    void ImageFollowCamera()
-    {
-        if (pickupImage == null)
-            return;
-        pickupImage.transform.LookAt(playerTarget);
-        pickupImage.transform.Rotate(0, 180, 0);
     }
 
 }

@@ -18,6 +18,7 @@ public class Item : MonoBehaviour
     public Itens itemType;
     public GameObject pickupImage;
     public Image timerPickUp;
+    public AlwaysFace faceCameraScript;
 
     Vector3 startPosition;
     Vector3 startRotation;
@@ -37,12 +38,12 @@ public class Item : MonoBehaviour
     private void Update()
     {
         pickupImage.GetComponent<RectTransform>().position = startPosition;
-        pickupImage.GetComponent<RectTransform>().localEulerAngles = startRotation;
+        //pickupImage.GetComponent<RectTransform>().localEulerAngles = startRotation;
     }
 
     public void PickUp(PhotonView PV)
     {
-        PV.RPC("RPC_DestroyItem", RpcTarget.All, GetComponent<PhotonView>().ViewID);
+        PV.RPC("RPC_DestroyItem", RpcTarget.AllBuffered, GetComponent<PhotonView>().ViewID);
     }
 
     private void OnCollisionEnter(Collision collision)
