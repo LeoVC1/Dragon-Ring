@@ -152,21 +152,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7676579613169448789}
     m_Modifications:
-    - target: {fileID: 159069733812805145, guid: 062c396810faa9948805648185fbadf9,
-        type: 3}
-      propertyPath: m_Name
-      value: "Po\xE7ao"
-      objectReference: {fileID: 0}
-    - target: {fileID: 159069733812805145, guid: 062c396810faa9948805648185fbadf9,
-        type: 3}
-      propertyPath: m_TagString
-      value: Item
-      objectReference: {fileID: 0}
-    - target: {fileID: 159069733812805145, guid: 062c396810faa9948805648185fbadf9,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 3778089956824280074, guid: 062c396810faa9948805648185fbadf9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -237,6 +222,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 159069733812805145, guid: 062c396810faa9948805648185fbadf9,
+        type: 3}
+      propertyPath: m_Name
+      value: "Po\xE7ao"
+      objectReference: {fileID: 0}
+    - target: {fileID: 159069733812805145, guid: 062c396810faa9948805648185fbadf9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 159069733812805145, guid: 062c396810faa9948805648185fbadf9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3747047227699744420, guid: 062c396810faa9948805648185fbadf9,
         type: 3}
       propertyPath: m_Layer
@@ -283,16 +283,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6838373744520305948}
     m_Modifications:
-    - target: {fileID: 59301303825392587, guid: 1bd1386d93e0061428ce4451467c9204,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 59301303825392587, guid: 1bd1386d93e0061428ce4451467c9204,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7934970324690091233, guid: 1bd1386d93e0061428ce4451467c9204,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -412,6 +402,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.1662192
+      objectReference: {fileID: 0}
+    - target: {fileID: 59301303825392587, guid: 1bd1386d93e0061428ce4451467c9204,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 59301303825392587, guid: 1bd1386d93e0061428ce4451467c9204,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9120270480770121578, guid: 1bd1386d93e0061428ce4451467c9204,
         type: 3}

@@ -39,7 +39,9 @@ public class ChangeItem : MonoBehaviour
         if (armorLevel == 1 && level > 1)
         {
             GameObject item = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "PeitoralFerro"), transform.position + Vector3.up, transform.rotation);
-            item.GetComponent<Rigidbody>().AddForce(transform.forward * 300);
+            Rigidbody rb = item.GetComponent<Rigidbody>();
+            if (rb != null)
+                rb.AddForce(transform.forward * 300);
         }
 
         armorLevel = level;
@@ -54,7 +56,9 @@ public class ChangeItem : MonoBehaviour
         if (helmetLevel == 1 && level > 1)
         {
             GameObject item = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "HelmetFerro"), transform.position + Vector3.up, transform.rotation);
-            item.GetComponent<Rigidbody>().AddForce(transform.forward * 300);
+            Rigidbody rb = item.GetComponent<Rigidbody>();
+            if(rb != null)
+                rb.AddForce(transform.forward * 300);
         }
 
         helmetLevel = level;
@@ -69,7 +73,9 @@ public class ChangeItem : MonoBehaviour
         if (weaponLevel == 1 && level > 1)
         {
             GameObject item = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "WeaponFerro"), transform.position + Vector3.up, transform.rotation);
-            item.GetComponent<Rigidbody>().AddForce(transform.forward * 300);
+            Rigidbody rb = item.GetComponent<Rigidbody>();
+            if (rb != null)
+                rb.AddForce(transform.forward * 300);
         }
 
         weaponLevel = level;

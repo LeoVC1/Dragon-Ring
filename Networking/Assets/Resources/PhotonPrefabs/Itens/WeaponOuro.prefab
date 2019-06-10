@@ -55,11 +55,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6806627326621172705}
     m_Modifications:
-    - target: {fileID: 3578117528433682223, guid: 790e416ecdcca36488f82dae9f20b38b,
-        type: 3}
-      propertyPath: m_Name
-      value: WeaponOuro
-      objectReference: {fileID: 0}
     - target: {fileID: 572906271082386748, guid: 790e416ecdcca36488f82dae9f20b38b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -124,6 +119,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.17951952
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578117528433682223, guid: 790e416ecdcca36488f82dae9f20b38b,
+        type: 3}
+      propertyPath: m_Name
+      value: WeaponOuro
       objectReference: {fileID: 0}
     - target: {fileID: 4794622734483865146, guid: 790e416ecdcca36488f82dae9f20b38b,
         type: 3}
