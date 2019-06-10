@@ -10,11 +10,27 @@ using TMPro;
 
 public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
+    public PhotonLobby lobby;
     public static PhotonRoom room;
     private PhotonView PV;
     public int multiplayerScene;
     private int currentScene;
     public TextMeshProUGUI roomName;
+    public bool isGameLoaded;
+
+    //Players
+    private Player[] photonPlayers;
+    public int playersInRoom;
+    public int myNumberInRoom;
+
+    public int playersInGame;
+
+    private bool readyToCount;
+    private bool readyToStart;
+    public float startingTime;
+    private float lessThanMaxPlayers;
+    private float atMaxPlayers;
+    private float timeToStart;
 
     private void Awake()
     {
@@ -49,29 +65,181 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     {
         base.OnJoinedRoom();
         Debug.Log("Has joined room");
-        PhotonLobby.lobby.nickName.gameObject.SetActive(false);
-        roomName.text = PhotonNetwork.CurrentRoom.Name;
-        if (!PhotonNetwork.IsMasterClient)
-            return;
+        photonPlayers = PhotonNetwork.PlayerList;
+        print("Player List : " + photonPlayers.Length);
+        playersInRoom = photonPlayers.Length;
+        myNumberInRoom = playersInRoom;
+        PhotonNetwork.NickName = myNumberInRoom.ToString();
+        if (MultiplayerSettings.multiplayerSettings.delayStart)
+        {
+            Debug.Log("Displayer players in room out of max players possible (" + playersInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayers + ")");
+            if (playersInRoom > 1)
+            {
+                readyToCount = true;
+            }
+            if (playersInRoom == MultiplayerSettings.multiplayerSettings.maxPlayers)
+            {
+                readyToStart = true;
+                if (!PhotonNetwork.IsMasterClient)
+                    return;
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+            }
+        }
+        else
+        {
+            if (!PhotonNetwork.IsMasterClient)
+                return;
+            StartGame();
+        }
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+        Debug.Log("A new players has joined the room");
+        photonPlayers = PhotonNetwork.PlayerList;
+        playersInRoom++;
+        if (MultiplayerSettings.multiplayerSettings.delayStart)
+        {
+            Debug.Log("Displayer players in room out of max players possible (" + playersInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayers + ")");
+            if (playersInRoom > 1)
+            {
+                readyToCount = true;
+            }
+            if (playersInRoom == MultiplayerSettings.multiplayerSettings.maxPlayers)
+            {
+                readyToStart = true;
+                if (!PhotonNetwork.IsMasterClient)
+                    return;
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+            }
+        }
+    }
+
+    private void Start()
+    {
+        PV = GetComponent<PhotonView>();
+        readyToCount = false;
+        readyToStart = false;
+        lessThanMaxPlayers = startingTime;
+        atMaxPlayers = 6;
+        timeToStart = startingTime;
+    }
+
+    private void Update()
+    {
+        if (MultiplayerSettings.multiplayerSettings.delayStart)
+        {
+            if (playersInRoom == 1)
+            {
+                RestartTimer();
+            }
+            if (!isGameLoaded)
+            {
+                if (readyToStart)
+                {
+                    atMaxPlayers -= Time.deltaTime;
+                    lessThanMaxPlayers = atMaxPlayers;
+                    timeToStart = atMaxPlayers;
+                }
+                else if (readyToCount)
+                {
+                    lessThanMaxPlayers -= Time.deltaTime;
+                    timeToStart = lessThanMaxPlayers;
+                }
+                Debug.Log("Display time to start to the players - " + timeToStart);
+                lobby.waitingText.text = "Waiting for players!";
+                lobby.timerText.text = System.Convert.ToInt32(timeToStart).ToString() + "s";
+                lobby.playersCountText.text = playersInRoom.ToString();
+                lobby.maxPlayersText.text = MultiplayerSettings.multiplayerSettings.maxPlayers.ToString();
+                if (timeToStart <= 0)
+                {
+                    lobby.waitingText.text = "Loading game...";
+                    lobby.timerText.enabled = false;
+                    lobby.playersCountText.enabled = false;
+                    lobby.maxPlayersText.enabled = false;
+                    lobby.cancelButton.SetActive(false);
+                    Color a = lobby.fadeOut.color;
+                    a.a = 1;
+                    lobby.fadeOut.color = a;
+                    StartGame();
+                }
+            }
+        }
+    }
+
+    IEnumerator FadeOut()
+    {
+        lobby.waitingText.text = "Loading game...";
+        lobby.timerText.enabled = false;
+        lobby.playersCountText.enabled = false;
+        lobby.maxPlayersText.enabled = false;
+
+        float t = 0;
+        while (t <= 1)
+        {
+            Color a = lobby.fadeOut.color;
+            a.a = Mathf.Lerp(0, 1, t);
+            lobby.fadeOut.color = a;
+            t += Time.deltaTime;
+            yield return null;
+        }
         StartGame();
     }
+
     void StartGame()
     {
         Debug.Log("Loading Level");
-        PhotonNetwork.LoadLevel(multiplayerScene);
+        isGameLoaded = true;
+        if (!PhotonNetwork.IsMasterClient)
+            return;
+        if (MultiplayerSettings.multiplayerSettings.delayStart)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+        }
+        PhotonNetwork.LoadLevel(MultiplayerSettings.multiplayerSettings.multiplayerScene);
     }
+
+    void RestartTimer()
+    {
+        lessThanMaxPlayers = startingTime;
+        timeToStart = startingTime;
+        atMaxPlayers = 6;
+        readyToCount = false;
+        readyToStart = false;
+    }
+
     void OnSceneFinisedLoading(Scene scene, LoadSceneMode mode)
     {
         currentScene = scene.buildIndex;
-        if (currentScene == multiplayerScene)
+        if (currentScene == MultiplayerSettings.multiplayerSettings.multiplayerScene)
         {
-            CreatePlayer();
+            isGameLoaded = true;
+            if (MultiplayerSettings.multiplayerSettings.delayStart)
+            {
+                PV.RPC("RPC_LoadedGameScene", RpcTarget.MasterClient);
+            }
+            else
+            {
+                CreatePlayer();
+            }
         }
     }
+
+    [PunRPC]
     private void CreatePlayer()
     {
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonNetworkPlayer"), transform.position, Quaternion.identity, 0);
     }
-    
+
+    [PunRPC]
+    void RPC_LoadedGameScene()
+    {
+        playersInGame++;
+        if (playersInGame == PhotonNetwork.PlayerList.Length)
+        {
+            PV.RPC("CreatePlayer", RpcTarget.All);
+        }
+    }
 
 }
