@@ -137,6 +137,8 @@ MonoBehaviour:
   armorLevel: 0
   helmetLevel: 0
   weaponLevel: 0
+  potions: 0
+  isDrinking: 0
 --- !u!114 &1265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +191,7 @@ MonoBehaviour:
   myAvatarCombat: {fileID: 1269}
   myCharacterID: 0
   health: 100
-  maxHealth: 0
+  maxHealth: 100
   myCamera: {fileID: 2788480217675629888}
   myAL: {fileID: 0}
   animator: {fileID: 0}

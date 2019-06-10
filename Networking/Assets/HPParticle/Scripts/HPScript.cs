@@ -25,13 +25,16 @@ public class HPScript : MonoBehaviour {
     }
 
     //Change the HP without an effect
-    public void ChangeHP(float Delta)
+    public void ChangeHPValue(float Delta)
 	{
-		HP = HP + Delta;
+        if (HP + Delta > MaxHP)
+            HP = MaxHP;
+        else
+            HP += Delta;
         avatarSetup.ChangeHP(HP);
     }
 
-    public void ChangeMaxHP(float Delta)
+    public void ChangeMaxHPValue(float Delta)
     {
         MaxHP += Delta;
         avatarSetup.ChangeMaxHP(MaxHP);
@@ -39,8 +42,8 @@ public class HPScript : MonoBehaviour {
 
     //Change the HP and Instantiates an HP Particle with a Custom Force and Color
     public void ChangeHP(float Delta,Vector3 Position, Vector3 Force, float ForceScatter, Color ThisColor)
-    { 
-        ChangeHP(Delta);
+    {
+        ChangeHPValue(Delta);
 
 
         GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
@@ -65,7 +68,7 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with a Custom Force
 	public void ChangeHP(float Delta,Vector3 Position, Vector3 Force, float ForceScatter)
 	{
-        ChangeHP(Delta);
+        ChangeHPValue(Delta);
 
         GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
@@ -89,7 +92,7 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with a Custom Color
 	public void ChangeHP(float Delta,Vector3 Position, Color ThisColor)
 	{
-        ChangeHP(Delta);
+        ChangeHPValue(Delta);
 
         GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
@@ -113,7 +116,7 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with default force and color
 	public void ChangeHP(float Delta,Vector3 Position)
 	{
-        ChangeHP(Delta);
+        ChangeHPValue(Delta);
 
         GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
@@ -138,7 +141,7 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with Custom Text
 	public void ChangeHP(float Delta,Vector3 Position, string text)
 	{
-        ChangeHP(Delta);
+        ChangeHPValue(Delta);
 
         GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
@@ -162,7 +165,7 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with Custom Text and Force,
 	public void ChangeHP(float Delta,Vector3 Position, Vector3 Force, float ForceScatter, string text)
 	{
-        ChangeHP(Delta);
+        ChangeHPValue(Delta);
 
         GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
@@ -186,7 +189,7 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with Custom Text, Force and Color
 	public void ChangeHP(float Delta,Vector3 Position, Vector3 Force, float ForceScatter, Color ThisColor, string text)
 	{
-        ChangeHP(Delta);
+        ChangeHPValue(Delta);
 
         GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;
@@ -201,7 +204,7 @@ public class HPScript : MonoBehaviour {
 	//Change the HP and Instantiates an HP Particle with Custom Text and Color
 	public void ChangeHP(float Delta,Vector3 Position, Color ThisColor, string text)
 	{
-        ChangeHP(Delta);
+        ChangeHPValue(Delta);
 		
 		GameObject NewHPP = Instantiate(HPParticle,Position,gameObject.transform.rotation) as GameObject;
         NewHPP.GetComponent<AlwaysFace>().Target = GetComponent<AvatarSetup>().myCamera.gameObject;

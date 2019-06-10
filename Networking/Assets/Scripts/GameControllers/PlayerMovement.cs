@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (PV.IsMine && ShopController.SC.isShopping == false)
         {
-            if(isAttacking == false && isPickingItem == false)
+            if(isAttacking == false && isPickingItem == false && avatarSetup.myInventario.isDrinking == false)
             {
                 RotateToForward();
                 float speed = BasicMovement();

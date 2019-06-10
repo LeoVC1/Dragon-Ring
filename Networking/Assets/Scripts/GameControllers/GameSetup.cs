@@ -12,6 +12,8 @@ public class GameSetup : MonoBehaviour
 
     public Image playerHealthBar;
     public Image playerManaBar;
+    public GameObject potionImage;
+    public TextMeshProUGUI potionsCount;
 
     public TextMeshProUGUI playerHealthValue;
     public TextMeshProUGUI playerMaxHealthValue;

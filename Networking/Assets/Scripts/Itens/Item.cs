@@ -9,7 +9,8 @@ public enum Itens
 {
     HELMET,
     ARMOR,
-    WEAPON
+    WEAPON,
+    POTION
 }
 
 public class Item : MonoBehaviour

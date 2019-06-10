@@ -10,6 +10,9 @@ public class Inventario : MonoBehaviour
     public int helmetLevel;
     public int weaponLevel;
 
+    public int potions;
+    public bool isDrinking = false;
+
     AvatarSetup avatarSetup;
     PhotonView PV;
 
@@ -22,7 +25,7 @@ public class Inventario : MonoBehaviour
         armorLevel = 0;
         helmetLevel = 0;
         weaponLevel = 0;
-}
+    }
 
     public void ChangeArmor(int level)
     {
@@ -61,5 +64,52 @@ public class Inventario : MonoBehaviour
     void RPC_ChangeWeapon(int level, int ID)
     {
         PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>().myChangeItem.ChangeWeapon(level);
+    }
+
+    private void Update()
+    {
+        DrinkPotion();
+    }
+
+    public void DrinkPotion()
+    {
+        if (!PV.IsMine)
+            return;
+        if(Input.GetKeyDown(KeyCode.Alpha1) && potions > 0 && isDrinking == false)
+        {
+            isDrinking = true;
+            RemovePotion();
+            avatarSetup.animator.SetTrigger("Potion");
+            PV.RPC("RPC_DrinkPotion", RpcTarget.All, PV.ViewID);
+        }
+    }
+
+    public void AddPotion()
+    {
+        GameSetup.GS.potionImage.SetActive(true);
+        potions++;
+        GameSetup.GS.potionsCount.text = potions.ToString() + "x";
+    }
+
+    public void RemovePotion()
+    {
+        potions--;
+        if(potions == 0)
+        {
+            GameSetup.GS.potionImage.SetActive(false);
+            GameSetup.GS.potionsCount.text = "";
+        }
+        else
+        {
+            GameSetup.GS.potionsCount.text = potions.ToString() + "x";
+        }
+
+        
+    }
+
+    [PunRPC]
+    void RPC_DrinkPotion(int ID)
+    {
+        PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>().myChangeItem.ShowPotion();
     }
 }

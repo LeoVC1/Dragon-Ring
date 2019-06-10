@@ -47,5 +47,6 @@ MonoBehaviour:
   - RPC_ChangeHelmet
   - RPC_ChangeWeapon
   - RPC_WarriorAttackProp
+  - RPC_DrinkPotion
   DisableAutoOpenWizard: 1
   ShowSettings: 1

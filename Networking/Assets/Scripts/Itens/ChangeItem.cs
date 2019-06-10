@@ -19,6 +19,8 @@ public class ChangeItem : MonoBehaviour
     public GameObject[] weapons2;
     public GameObject[] previousWeapons;
 
+    public GameObject handPotion;
+
     public int armorLevel = 0;
     public int helmetLevel = 0;
     public int weaponLevel = 0;
@@ -26,7 +28,9 @@ public class ChangeItem : MonoBehaviour
     public int equipedItens = 0;
     private int previousEquipedItens = 0;
     public float healthPerEquip = 10;
-    public float damagePerEquip = 10; 
+    public float damagePerEquip = 10;
+
+    private int aux = 0;
 
     public AvatarSetup mySetup;
 
@@ -73,5 +77,23 @@ public class ChangeItem : MonoBehaviour
         mySetup.myAvatarCombat.ChangeDamage(damagePerEquip * weaponLevel);
 
         mySetup.myInventario.weaponLevel = weaponLevel;
+    }
+
+    public void ShowPotion()
+    {
+        aux = weaponLevel;
+
+        weaponLevel = -1;
+
+        handPotion.SetActive(true);
+        Invoke("HidePotion", 3f);
+    }
+
+    public void HidePotion()
+    {
+        mySetup.myInventario.isDrinking = false;
+        mySetup.myHPScript.ChangeHPValue(50);
+        weaponLevel = aux;
+        handPotion.SetActive(false);
     }
 }
