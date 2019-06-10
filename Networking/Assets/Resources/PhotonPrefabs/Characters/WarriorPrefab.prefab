@@ -1323,7 +1323,7 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: Attack2
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: Potion
   m_SynchronizeLayers:
   - SynchronizeType: 1
