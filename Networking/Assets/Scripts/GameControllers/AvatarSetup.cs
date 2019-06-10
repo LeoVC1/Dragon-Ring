@@ -56,6 +56,7 @@ public class AvatarSetup : MonoBehaviour
         if (PV.IsMine)
         {
             GameSetup.GS.playerHealthBar.fillAmount = health / maxHealth;
+            print(health / maxHealth);
             GameSetup.GS.playerMaxHealthValue.text = maxHealth.ToString();
         }
     }
