@@ -135,8 +135,8 @@ public class AvatarSetup : MonoBehaviour
     void RPC_AddKillToKiller(int ID, int myID)
     {
         AvatarSetup AS = PhotonView.Find(myID).gameObject.GetComponent<AvatarSetup>();
-        AS.animator.GetComponent<BoxCollider>().enabled = true;
-        AS.animator.GetComponent<Rigidbody>().isKinematic = false;
+        AS.myChangeItem.GetComponent<BoxCollider>().enabled = true;
+        AS.myChangeItem.GetComponent<Rigidbody>().isKinematic = false;
         AS.GetComponent<Rigidbody>().useGravity = false;
         AS.GetComponent<CapsuleCollider>().enabled = false;
         PhotonView.Find(ID).gameObject.GetComponent<AvatarCombat>().Kill();

@@ -167,13 +167,15 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
                     Color a = lobby.fadeOut.color;
                     a.a = 1;
                     lobby.fadeOut.color = a;
-                    playersAlive = photonPlayers.Length;
+                    playersAlive = playersInRoom;
                     StartGame();
                 }
             }
         }
+        playersAlive = playersInRoom;
         if (currentScene == MultiplayerSettings.multiplayerSettings.multiplayerScene)
         {
+            Debug.Log(playersAlive);
             GameSetup.GS.playersCountText.text = playersAlive.ToString();
             if (playersAlive == 1)
             {
