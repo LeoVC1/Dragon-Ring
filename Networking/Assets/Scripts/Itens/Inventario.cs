@@ -31,6 +31,10 @@ public class Inventario : MonoBehaviour
     {
         if (!PV.IsMine)
             return;
+        if (level == 1)
+            GameSetup.GS.armorImage.color = Color.white;
+        else if (level == 2)
+            GameSetup.GS.armorImage.color = Color.yellow;
         PV.RPC("RPC_ChangeArmorItens", RpcTarget.All, level, PV.ViewID);
     }
 
@@ -44,6 +48,14 @@ public class Inventario : MonoBehaviour
     {
         if (!PV.IsMine)
             return;
+        if (level == 1)
+            GameSetup.GS.helmetImageSilver.SetActive(true);
+        else if (level == 2)
+        {
+            GameSetup.GS.helmetImageSilver.SetActive(false);
+            GameSetup.GS.helmetImageGold.SetActive(true);
+        }
+            
         PV.RPC("RPC_ChangeHelmet", RpcTarget.All, level, PV.ViewID);
     }
 
@@ -63,6 +75,10 @@ public class Inventario : MonoBehaviour
     [PunRPC]
     void RPC_ChangeWeapon(int level, int ID)
     {
+        if (level == 1)
+            GameSetup.GS.weaponImage.color = Color.white;
+        else if (level == 2)
+            GameSetup.GS.weaponImage.color = Color.yellow;
         PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>().myChangeItem.ChangeWeapon(level);
     }
 

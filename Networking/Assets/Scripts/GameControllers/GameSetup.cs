@@ -29,6 +29,11 @@ public class GameSetup : MonoBehaviour
     public TextMeshProUGUI kills;
     public TextMeshProUGUI finalKills;
 
+    public Image weaponImage;
+    public Image armorImage;
+    public GameObject helmetImageSilver;
+    public GameObject helmetImageGold;
+
 
     public TextMeshProUGUI playersCountText;
     public RawImage minimapImage;
