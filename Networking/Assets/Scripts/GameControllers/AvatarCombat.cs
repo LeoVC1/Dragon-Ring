@@ -18,6 +18,7 @@ public class AvatarCombat : MonoBehaviour
     public GameObject hitPropStone;
     public Transform rayOrigin;
     public float damage = 20;
+    public int kills = 0;
 
     public bool _lock;
 
@@ -31,12 +32,13 @@ public class AvatarCombat : MonoBehaviour
         avatarSetup = GetComponent<AvatarSetup>();
         movementScript = GetComponent<PlayerMovement>();
         HPScript = GetComponent<HPScript>();
+        GameSetup.GS.kills.text = kills.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!PV.IsMine)
+        if (!PV.IsMine || avatarSetup.died)
         {
             return;
         }
@@ -58,10 +60,10 @@ public class AvatarCombat : MonoBehaviour
                         Vector3 direction = hit.point - hit.collider.transform.position;
                         GameObject hitmark = Instantiate(hitMarkPrefab, hit.collider.transform.position + Vector3.up, Quaternion.identity);
                         Destroy(hitmark, 0.5f);
-                        PV.RPC("RPC_WarriorAttack", RpcTarget.All, damage, ID, hit.collider.transform.position.x, hit.collider.transform.position.y, hit.collider.transform.position.z);
+                        PV.RPC("RPC_WarriorAttack", RpcTarget.All, damage, ID, hit.collider.transform.position.x, hit.collider.transform.position.y, hit.collider.transform.position.z, PhotonNetwork.NickName, PV.ViewID);
                         _lock = true;
                     }
-                    else if(hit.transform.tag == "WoodProps" || hit.transform.tag == "StoneProps")
+                    else if (hit.transform.tag == "WoodProps" || hit.transform.tag == "StoneProps")
                     {
                         PV.RPC("RPC_WarriorAttackProp", RpcTarget.All, hit.point.x, hit.point.y, hit.point.z, hit.transform.tag);
                         _lock = true;
@@ -71,15 +73,27 @@ public class AvatarCombat : MonoBehaviour
         }
     }
 
+    public void Kill()
+    {
+        if (!PV.IsMine)
+            return;
+        kills++;
+        GameSetup.GS.kills.text = kills.ToString();
+        GameSetup.GS.finalKills.text = "Voce obteve um total de " + kills.ToString() + " abates!";
+    }
+
     public void ChangeDamage(float value)
     {
+        if (!PV.IsMine)
+            return;
         damage += value;
     }
 
     [PunRPC]
-    void RPC_WarriorAttack(float damage, int ID, float x, float y, float z)
+    void RPC_WarriorAttack(float damage, int ID, float x, float y, float z, string nick, int myID)
     {
         PhotonView.Find(ID).gameObject.GetComponent<HPScript>().ChangeHP(-damage, new Vector3(x, y + 1, z), Vector3.up, 100f);
+        PhotonView.Find(ID).gameObject.GetComponent<HPScript>().SetNickname(nick, myID);
         GameObject particle = Instantiate(hitParticle, new Vector3(x, y + 1, z), Quaternion.identity);
         Destroy(particle, 0.5f);
     }
@@ -99,7 +113,7 @@ public class AvatarCombat : MonoBehaviour
                 Destroy(particle, 0.5f);
                 break;
         }
-        
+
     }
 
 }

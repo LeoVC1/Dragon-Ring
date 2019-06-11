@@ -42,14 +42,14 @@ public class ItemCollider : MonoBehaviour
             Item otherItem = other.GetComponent<Item>();
             float itemLevel = otherItem.level;
             Itens item = otherItem.itemType;
-            if ((!nearItens.Contains(other)) && ((inventario.armorLevel < itemLevel && item == Itens.ARMOR) 
-                                             ||  (inventario.helmetLevel < itemLevel && item == Itens.HELMET)
+            if ((!nearItens.Contains(other)) && ((inventario.armorLevel < itemLevel && item == Itens.ARMOR)
+                                             || (inventario.helmetLevel < itemLevel && item == Itens.HELMET)
                                              || (inventario.weaponLevel < itemLevel && item == Itens.WEAPON)
                                              || item == Itens.POTION && inventario.potions < 3))
             {
                 nearItens.Add(other);
-            } 
-            for(int i = 0; i < nearItens.Count; i++)
+            }
+            for (int i = 0; i < nearItens.Count; i++)
             {
                 if (nearItens[i] == null)
                     nearItens.Remove(nearItens[i]);
@@ -64,7 +64,7 @@ public class ItemCollider : MonoBehaviour
                     nearItens[i].GetComponent<Item>().pickupImage.gameObject.SetActive(false);
                 }
             }
-            if(nearestItem != null)
+            if (nearestItem != null)
                 ChangeItem(nearestItem);
         }
     }
@@ -87,7 +87,7 @@ public class ItemCollider : MonoBehaviour
             other.GetComponent<Item>().pickupImage.gameObject.SetActive(false);
             nearItens.Remove(other);
         }
-        if(nearItens.Count == 0)
+        if (nearItens.Count == 0)
         {
             pickupImage = null;
             nearestItem = null;

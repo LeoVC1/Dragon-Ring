@@ -99,6 +99,7 @@ MonoBehaviour:
     type: 3}
   rayOrigin: {fileID: 0}
   damage: 20
+  kills: 0
   _lock: 0
 --- !u!114 &1266
 MonoBehaviour:
@@ -195,6 +196,7 @@ MonoBehaviour:
   myCamera: {fileID: 2788480217675629888}
   myAL: {fileID: 0}
   animator: {fileID: 0}
+  died: 0
 --- !u!114 &3854453130902014550
 MonoBehaviour:
   m_ObjectHideFlags: 0
