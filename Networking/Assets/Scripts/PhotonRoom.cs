@@ -244,7 +244,14 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         playersInGame--;
     }
 
+    
     public void PlayerDied()
+    {
+        PV.RPC("Morri", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void Morri()
     {
         playersAlive--;
         GameSetup.GS.playersCountText.text = playersAlive.ToString();

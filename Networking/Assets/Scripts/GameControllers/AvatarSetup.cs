@@ -91,7 +91,11 @@ public class AvatarSetup : MonoBehaviour
         GameSetup.GS.killerNickname.text = "Killed by " + nick;
         GameSetup.GS.finalKills.text = "You killed " + GetComponent<AvatarCombat>().kills.ToString() + " players!!!";
         animator.SetBool("Die", died);
-        if(ID != -1)
+        AS.animator.GetComponent<BoxCollider>().enabled = true;
+        AS.animator.GetComponent<Rigidbody>().isKinematic = false;
+        AS.GetComponent<Rigidbody>().useGravity = false;
+        AS.GetComponent<CapsuleCollider>().enabled = false;
+        if (ID != -1)
             PV.RPC("RPC_AddKillToKiller", RpcTarget.All, ID);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
