@@ -75,7 +75,7 @@ public class GameSetup : MonoBehaviour
                 if (safeZoneTimer >= 0)
                 {
                     safeZoneRadius -= decreaseFlux * Time.deltaTime;
-                    circle.localScale = new Vector3(safeZoneRadius * startScale.x / 365, startScale.y, safeZoneRadius * startScale.z / 365);
+                    circle.localScale = new Vector3(safeZoneRadius * startScale.x / 340, startScale.y, safeZoneRadius * startScale.z / 340);
                     safeZoneTimer -= Time.deltaTime;
                     if (lockDragon == false)
                     {

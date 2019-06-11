@@ -33,6 +33,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private float timeToStart;
     public int myNumber;
     public int playersAlive;
+    public bool winner;
 
     private void Awake()
     {
@@ -173,7 +174,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             GameSetup.GS.playersCountText.text = photonPlayers.Length.ToString();
             if (photonPlayers.Length == 1)
             {
-                
+                winner = true;
             }
         }
     }

@@ -8767,6 +8767,9 @@ MonoBehaviour:
   myNumberInRoom: 0
   playersInGame: 0
   startingTime: 30
+  myNumber: 0
+  playersAlive: 0
+  winner: 0
 --- !u!4 &2078365684
 Transform:
   m_ObjectHideFlags: 0
@@ -8866,7 +8869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dfd578b48a4118488e5259a99f917c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayStart: 0
+  delayStart: 1
   maxPlayers: 5
   menuScene: 1
   multiplayerScene: 2

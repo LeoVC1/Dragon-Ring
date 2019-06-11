@@ -26,6 +26,7 @@ public class AvatarSetup : MonoBehaviour
     public Animator animator;
     private float timer = 5;
     public bool died = false;
+    public bool locker = false;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +53,11 @@ public class AvatarSetup : MonoBehaviour
                 timer -= Time.deltaTime;
             else
                 GameSetup.GS.DisconnectPlayer();
+        }
+        if (PhotonRoom.room.winner && !locker)
+        {
+            Win();
+            locker = true;
         }
     }
 

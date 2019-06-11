@@ -197,6 +197,7 @@ MonoBehaviour:
   myAL: {fileID: 0}
   animator: {fileID: 0}
   died: 0
+  locker: 0
 --- !u!114 &3854453130902014550
 MonoBehaviour:
   m_ObjectHideFlags: 0
