@@ -31,6 +31,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private float lessThanMaxPlayers;
     private float atMaxPlayers;
     private float timeToStart;
+    public int myNumber;
+    public int playersAlive;
 
     private void Awake()
     {
@@ -68,6 +70,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         photonPlayers = PhotonNetwork.PlayerList;
         print("Player List : " + photonPlayers.Length);
         playersInRoom = photonPlayers.Length;
+        myNumber = photonPlayers.Length;
         PhotonNetwork.NickName = lobby.nickName.text;
         if (MultiplayerSettings.multiplayerSettings.delayStart)
         {
@@ -164,12 +167,13 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
                     StartGame();
                 }
             }
-            else
+        }
+        if (currentScene == MultiplayerSettings.multiplayerSettings.multiplayerScene)
+        {
+            GameSetup.GS.playersCountText.text = photonPlayers.Length.ToString();
+            if (photonPlayers.Length == 1)
             {
-                if (currentScene == MultiplayerSettings.multiplayerSettings.multiplayerScene)
-                {
-                    GameSetup.GS.playersCountText.text = playersInGame.ToString();
-                }
+                
             }
         }
     }
@@ -202,6 +206,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         if (currentScene == MultiplayerSettings.multiplayerSettings.multiplayerScene)
         {
             isGameLoaded = true;
+            playersAlive = playersInGame;
             if (MultiplayerSettings.multiplayerSettings.delayStart)
             {
                 PV.RPC("RPC_LoadedGameScene", RpcTarget.MasterClient);
@@ -233,6 +238,12 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     {
         base.OnPlayerLeftRoom(otherPlayer);
         playersInGame--;
+    }
+
+    public void PlayerDied()
+    {
+        playersAlive--;
+        GameSetup.GS.playersCountText.text = playersAlive.ToString();
     }
 
 }

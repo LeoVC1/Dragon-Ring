@@ -24,7 +24,7 @@ public class AvatarSetup : MonoBehaviour
     public AudioListener myAL;
 
     public Animator animator;
-
+    private float timer = 5;
     public bool died = false;
 
     // Start is called before the first frame update
@@ -39,6 +39,19 @@ public class AvatarSetup : MonoBehaviour
         {
             Destroy(myCamera);
             Destroy(myAL);
+        }
+    }
+
+    private void Update()
+    {
+        if (!PV.IsMine)
+            return;
+        if (died)
+        {
+            if (timer > 0)
+                timer -= Time.deltaTime;
+            else
+                GameSetup.GS.DisconnectPlayer();
         }
     }
 
@@ -69,10 +82,25 @@ public class AvatarSetup : MonoBehaviour
             return;
         died = true;
         GameSetup.GS.loserLabel.SetActive(true);
-        GameSetup.GS.killerNickname.text = "Voce foi morto por " + nick;
-        GameSetup.GS.finalKills.text = "Voce obteve um total de " + GetComponent<AvatarCombat>().kills.ToString() + " abates!";
+        GameSetup.GS.killerNickname.text = "Killed by " + nick;
+        GameSetup.GS.finalKills.text = "You killed " + GetComponent<AvatarCombat>().kills.ToString() + " players!!!";
+        animator.SetBool("Die", died);
+        animator.GetComponent<BoxCollider>().enabled = true;
+        animator.GetComponent<Rigidbody>().isKinematic = false;
+        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<CapsuleCollider>().enabled = false;
         if(ID != -1)
             PV.RPC("RPC_AddKillToKiller", RpcTarget.All, ID);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void Win()
+    {
+        died = true;
+        GameSetup.GS.loserLabel.SetActive(true);
+        GameSetup.GS.killerNickname.text = "You win!";
+        GameSetup.GS.finalKills.text = "You killed " + GetComponent<AvatarCombat>().kills.ToString() + " players!!!";
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

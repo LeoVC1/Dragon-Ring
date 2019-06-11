@@ -37,8 +37,8 @@ public class GameSetup : MonoBehaviour
     private float decreaseFlux = 1f;
     public Transform safeZoneCenter;
     private bool readyToCount;
-    private float safeZoneTimer = 30;
-    private float safeTimer = 5;
+    private float safeZoneTimer = 45;
+    private float safeTimer = 45;
     public int waves = 1;
     public TextMeshProUGUI safeZoneTimerText;
     public Transform circle;
@@ -47,6 +47,7 @@ public class GameSetup : MonoBehaviour
     public DragonMovement dragonMove;
 
     bool decrease = false;
+    bool lockDragon = false;
 
     private void OnDrawGizmos()
     {
@@ -61,51 +62,61 @@ public class GameSetup : MonoBehaviour
             GS = this;
         }
         startScale = circle.localScale;
+        circle.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
     {
-        if (readyToCount)
+        if(safeZoneRadius > 30)
         {
-            if (safeZoneTimer >= 0)
+            if (readyToCount)
             {
-                safeZoneRadius -= decreaseFlux * Time.deltaTime;
-                circle.localScale = new Vector3(safeZoneRadius * startScale.x / 350, startScale.y, safeZoneRadius * startScale.z / 350);
-                safeZoneTimer -= Time.deltaTime;
-                dragonMove.StartMovement(circle.localScale.x >= 500 ? 1 : 2);
-            }
-            else
-            {
-                dragonMove.StopMovement();
-                safeZoneTimer = 30;
-                safeZoneTimerText.color = Color.green;
-                readyToCount = false;
-                if (decrease)
-                    if (waves > 2)
-                        waves--;
-                    else
-                        decrease = false;
-                else if (waves < 6)
-                    waves++;
+                circle.gameObject.SetActive(true);
+                if (safeZoneTimer >= 0)
+                {
+                    safeZoneRadius -= decreaseFlux * Time.deltaTime;
+                    circle.localScale = new Vector3(safeZoneRadius * startScale.x / 365, startScale.y, safeZoneRadius * startScale.z / 365);
+                    safeZoneTimer -= Time.deltaTime;
+                    if (lockDragon == false)
+                    {
+                        dragonMove.StartMovement();
+                        lockDragon = true;
+                    }
+                }
                 else
-                    decrease = true;
-                decreaseFlux = waves * 1f;
-            }
-            safeZoneTimerText.text = IntToSeconds(System.Convert.ToInt32(safeZoneTimer));
-        }
-        else
-        {
-            if (safeTimer <= 0)
-            {
-                readyToCount = true;
-                safeZoneTimerText.color = Color.red;
-                safeTimer = 5;
+                {
+                    dragonMove.StopMovement();
+                    safeZoneTimer = 45;
+                    safeZoneTimerText.color = Color.green;
+                    readyToCount = false;
+                    if (decrease)
+                        if (waves > 2)
+                            waves--;
+                        else
+                            decrease = false;
+                    else if (waves < 6)
+                        waves++;
+                    else
+                        decrease = true;
+                    decreaseFlux = waves * 1f;
+                }
+                safeZoneTimerText.text = IntToSeconds(System.Convert.ToInt32(safeZoneTimer));
             }
             else
             {
-                safeTimer -= Time.deltaTime;
+                if (safeTimer <= 0)
+                {
+                    lockDragon = false;
+                    readyToCount = true;
+                    safeZoneTimerText.color = Color.red;
+                    safeTimer = 45;
+                }
+                else
+                {
+                    safeTimer -= Time.deltaTime;
+                }
+                safeZoneTimerText.text = IntToSeconds(System.Convert.ToInt32(safeTimer));
             }
-            safeZoneTimerText.text = IntToSeconds(System.Convert.ToInt32(safeTimer));
         }
         
     }
@@ -139,6 +150,7 @@ public class GameSetup : MonoBehaviour
         PhotonNetwork.Disconnect();
         while (PhotonNetwork.IsConnected)
             yield return null;
+        PhotonRoom.room.PlayerDied();
         SceneManager.LoadScene(MultiplayerSettings.multiplayerSettings.menuScene);
     }
 

@@ -100,31 +100,26 @@ public class PlayerMovement : MonoBehaviour
 
     void RunningMovement(float speed)
     {
-        if (Input.GetKey(KeyCode.LeftShift) && speed != 0 && stamina > 0 && isBreathing == false)
+        if (Input.GetKey(KeyCode.LeftShift) && speed != 0 /*&& stamina > 0 && isBreathing == false*/)
         {
             isRunning = true;
             runSpeed = 2.5f;
-            stamina -= 15 * Time.deltaTime;
+            //stamina -= 15 * Time.deltaTime;
         }
         else
         {
             isRunning = false;
             runSpeed = 1;
-            if (stamina < 100)
-                stamina += 10 * Time.deltaTime;
-            if (isBreathing == false && stamina < 0)
-            {
-                isBreathing = true;
-                Invoke("TakeABreath", 2);
-            }
+            //if (stamina < 100)
+            //    stamina += 10 * Time.deltaTime;
+            //if (isBreathing == false && stamina < 0)
+            //{
+            //    isBreathing = true;
+            //    Invoke("TakeABreath", 2);
+            //}
         }
         avatarSetup.animator.SetBool("Run", isRunning);
-        staminaBar.fillAmount = stamina / 100f;
-    }
-
-    void TakeABreath()
-    {
-        isBreathing = false;
+        //staminaBar.fillAmount = stamina / 100f;
     }
 
     void Attack()
@@ -155,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (distanceToCenter > GameSetup.GS.safeZoneRadius)
         {
-            PV.RPC("RPC_TakeDamage", RpcTarget.All, PV.ViewID, -GameSetup.GS.waves * Time.deltaTime);
+            PV.RPC("RPC_TakeDamage", RpcTarget.All, PV.ViewID, -GameSetup.GS.waves * Time.deltaTime / 2);
         }
     }
 

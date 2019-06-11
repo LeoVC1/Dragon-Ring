@@ -13,11 +13,10 @@ public class PhotonPlayer : MonoBehaviour
     void Start()
     {
         PV = GetComponent<PhotonView>();
-        int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints.Length);
         if (PV.IsMine)
         {
             myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerAvatar"), 
-                GameSetup.GS.spawnPoints[spawnPicker].position, GameSetup.GS.spawnPoints[spawnPicker].rotation, 0);
+                GameSetup.GS.spawnPoints[PhotonRoom.room.myNumber].position, GameSetup.GS.spawnPoints[PhotonRoom.room.myNumber].rotation, 0);
 
         }
     }
