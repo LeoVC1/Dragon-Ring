@@ -8,7 +8,7 @@ public class SpawnerItem : MonoBehaviour
 {
     public GameObject instantiated;
 
-    private string[] itensName = { "PeitoralFerro", "PeitoralOuro", "HelmetFerro", "HelmetOuro", "WeaponFerro", "WeaponOuro" , "Potion"};
+    private string[] itensName = { "PeitoralFerro", "Potion", "HelmetFerro", "WeaponFerro", "HelmetOuro", "WeaponOuro" , "PeitoralOuro" };
 
     void Start()
     {
@@ -17,7 +17,13 @@ public class SpawnerItem : MonoBehaviour
 
     void SpawnRandomItem()
     {
-        instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", itensName[Random.Range(0, itensName.Length)]), transform.position, Quaternion.identity);
+        int n = Random.Range(0, 11);
+        if (n > 3)
+            n = Random.Range(0, 4);
+        else
+            n = Random.Range(0, itensName.Length);
+
+        instantiated = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", itensName[n]), transform.position, Quaternion.identity);
         instantiated.transform.parent = transform;
     }
 
