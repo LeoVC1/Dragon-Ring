@@ -97,7 +97,6 @@ public class AvatarSetup : MonoBehaviour
         GetComponent<CapsuleCollider>().enabled = false;
         if (ID != -1)
             PV.RPC("RPC_AddKillToKiller", RpcTarget.All, ID, PV.ViewID);
-        PhotonRoom.room.PlayerDied();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -140,6 +139,7 @@ public class AvatarSetup : MonoBehaviour
         AS.GetComponent<Rigidbody>().useGravity = false;
         AS.GetComponent<CapsuleCollider>().enabled = false;
         PhotonView.Find(ID).gameObject.GetComponent<AvatarCombat>().Kill();
+        PhotonRoom.room.PlayerDied();
     }
 
 }
