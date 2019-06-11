@@ -175,7 +175,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         }
         if (currentScene == MultiplayerSettings.multiplayerSettings.multiplayerScene)
         {
-            Debug.Log(playersAlive);
             GameSetup.GS.playersCountText.text = playersAlive.ToString();
             if (playersAlive == 1)
             {
@@ -220,6 +219,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             else
             {
                 CreatePlayer();
+                //PV.RPC("StartAlive", RpcTarget.AllBuffered);
             }
         }
     }
@@ -228,6 +228,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void CreatePlayer()
     {
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonNetworkPlayer"), transform.position, Quaternion.identity, 0);
+        PhotonRoom.room.playersAlive = playersInRoom;
+        GameSetup.GS.playersCountText.text = playersAlive.ToString();
     }
 
     [PunRPC]
@@ -249,7 +251,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     
     public void PlayerDied()
     {
-        Debug.Log("Morri");
         PV.RPC("Morri", RpcTarget.All);
     }
 
@@ -257,7 +258,13 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public void Morri()
     {
         playersAlive--;
-        Debug.Log(playersAlive);
+        GameSetup.GS.playersCountText.text = playersAlive.ToString();
+    }
+
+    [PunRPC]
+    public void StartAlive()
+    {
+        PhotonRoom.room.playersAlive = playersInGame;
         GameSetup.GS.playersCountText.text = playersAlive.ToString();
     }
 
