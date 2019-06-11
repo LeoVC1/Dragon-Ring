@@ -91,10 +91,6 @@ public class AvatarSetup : MonoBehaviour
         GameSetup.GS.killerNickname.text = "Killed by " + nick;
         GameSetup.GS.finalKills.text = "You killed " + GetComponent<AvatarCombat>().kills.ToString() + " players!!!";
         animator.SetBool("Die", died);
-        animator.GetComponent<BoxCollider>().enabled = true;
-        animator.GetComponent<Rigidbody>().isKinematic = false;
-        GetComponent<Rigidbody>().useGravity = false;
-        GetComponent<CapsuleCollider>().enabled = false;
         if(ID != -1)
             PV.RPC("RPC_AddKillToKiller", RpcTarget.All, ID);
         Cursor.lockState = CursorLockMode.None;
@@ -131,9 +127,15 @@ public class AvatarSetup : MonoBehaviour
     }
 
     [PunRPC]
-    void RPC_AddKillToKiller(int ID)
+    void RPC_AddKillToKiller(int ID, int myID)
     {
+        AvatarSetup AS = PhotonView.Find(myID).gameObject.GetComponent<AvatarSetup>();
+        AS.animator.GetComponent<BoxCollider>().enabled = true;
+        AS.animator.GetComponent<Rigidbody>().isKinematic = false;
+        AS.GetComponent<Rigidbody>().useGravity = false;
+        AS.GetComponent<CapsuleCollider>().enabled = false;
         PhotonView.Find(ID).gameObject.GetComponent<AvatarCombat>().Kill();
+        PhotonRoom.room.PlayerDied();
     }
 
 }
