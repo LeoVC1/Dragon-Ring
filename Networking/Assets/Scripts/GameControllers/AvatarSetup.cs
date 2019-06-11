@@ -25,6 +25,8 @@ public class AvatarSetup : MonoBehaviour
 
     public Animator animator;
 
+    public bool died = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +48,8 @@ public class AvatarSetup : MonoBehaviour
         if (PV.IsMine)
         {
             GameSetup.GS.playerHealthBar.fillAmount = health / maxHealth;
-            GameSetup.GS.playerHealthValue.text = health.ToString();
+            GameSetup.GS.playerHealthValue.text = System.Convert.ToInt32(health).ToString();
+
         }
     }
 
@@ -56,8 +59,22 @@ public class AvatarSetup : MonoBehaviour
         if (PV.IsMine)
         {
             GameSetup.GS.playerHealthBar.fillAmount = health / maxHealth;
-            GameSetup.GS.playerMaxHealthValue.text = maxHealth.ToString();
+            GameSetup.GS.playerMaxHealthValue.text = System.Convert.ToInt32(maxHealth).ToString();
         }
+    }
+
+    public void Die(string nick, int ID)
+    {
+        if (!PV.IsMine)
+            return;
+        died = true;
+        GameSetup.GS.loserLabel.SetActive(true);
+        GameSetup.GS.killerNickname.text = "Voce foi morto por " + nick;
+        GameSetup.GS.finalKills.text = "Voce obteve um total de " + GetComponent<AvatarCombat>().kills.ToString() + " abates!";
+        if(ID != -1)
+            PV.RPC("RPC_AddKillToKiller", RpcTarget.All, ID);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void AddCharacter(int whichCharacter, string myNick)
@@ -77,6 +94,12 @@ public class AvatarSetup : MonoBehaviour
         aSetup.myInventario = aSetup.GetComponent<Inventario>();
         aSetup.myChangeItem = PhotonView.Find(myCharacterID).GetComponent<ChangeItem>();
         aSetup.myChangeItem.mySetup = this;
+    }
+
+    [PunRPC]
+    void RPC_AddKillToKiller(int ID)
+    {
+        PhotonView.Find(ID).gameObject.GetComponent<AvatarCombat>().Kill();
     }
 
 }

@@ -21,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
     AvatarCombat avatarCombat;
     public bool isAttacking;
 
+    Transform safeZoneCenter;
+    Vector2 positionCenterXZ;
+    HPScript myHPScript;
+
     public Transform camT;
     Vector3 camF;
 
@@ -32,14 +36,21 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         avatarSetup = GetComponent<AvatarSetup>();
         avatarCombat = GetComponent<AvatarCombat>();
+        myHPScript = GetComponent<HPScript>();
         staminaBar = GameSetup.GS.playerManaBar;
+
+        safeZoneCenter = GameSetup.GS.safeZoneCenter;
+        positionCenterXZ = new Vector2(safeZoneCenter.position.x, safeZoneCenter.position.z);
     }
 
     void Update()
     {
-        if (PV.IsMine && ShopController.SC.isShopping == false)
+        if (avatarSetup.died)
+            return;
+
+        if (PV.IsMine)
         {
-            if(isAttacking == false && isPickingItem == false && avatarSetup.myInventario.isDrinking == false)
+            if (isAttacking == false && isPickingItem == false && avatarSetup.myInventario.isDrinking == false)
             {
                 RotateToForward();
                 float speed = BasicMovement();
@@ -48,6 +59,12 @@ public class PlayerMovement : MonoBehaviour
                 Attack();
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (PV.IsMine && avatarSetup.died == false)
+            VerifySafeZone();
     }
 
     float BasicMovement()
@@ -84,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
     void RunningMovement(float speed)
     {
         if (Input.GetKey(KeyCode.LeftShift) && speed != 0 && stamina > 0 && isBreathing == false)
-        { 
+        {
             isRunning = true;
             runSpeed = 2.5f;
             stamina -= 15 * Time.deltaTime;
@@ -93,9 +110,9 @@ public class PlayerMovement : MonoBehaviour
         {
             isRunning = false;
             runSpeed = 1;
-            if(stamina < 100)
+            if (stamina < 100)
                 stamina += 10 * Time.deltaTime;
-            if(isBreathing == false && stamina < 0)
+            if (isBreathing == false && stamina < 0)
             {
                 isBreathing = true;
                 Invoke("TakeABreath", 2);
@@ -114,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(Random.Range(0,2) == 0)
+            if (Random.Range(0, 2) == 0)
                 avatarSetup.animator.SetTrigger("Attack1");
             else
                 avatarSetup.animator.SetTrigger("Attack2");
@@ -129,6 +146,24 @@ public class PlayerMovement : MonoBehaviour
         avatarSetup.animator.ResetTrigger("Attack2");
         isAttacking = false;
         avatarCombat._lock = false;
+    }
+
+    void VerifySafeZone()
+    {
+        Vector2 positionXZ = new Vector2(transform.position.x, transform.position.z);
+        float distanceToCenter = Vector2.Distance(positionXZ, positionCenterXZ);
+        
+        if (distanceToCenter > GameSetup.GS.safeZoneRadius)
+        {
+            PV.RPC("RPC_TakeDamage", RpcTarget.All, PV.ViewID, -GameSetup.GS.waves * Time.deltaTime);
+        }
+    }
+
+    [PunRPC]
+    void RPC_TakeDamage(int ID, float damage)
+    {
+        PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>().myHPScript.ChangeHPValue(damage);
+        PhotonView.Find(ID).gameObject.GetComponent<AvatarSetup>().myHPScript.SetNickname("fogo!");
     }
 
 }

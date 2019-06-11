@@ -27,10 +27,12 @@ public class PlayerItemPickUp : MonoBehaviour
 
     private void Update()
     {
-        if (!PV.IsMine)
+        if (!PV.IsMine || avatarSetup.died)
             return;
 
-        if(pickUpItem != null)
+
+
+        if (pickUpItem != null)
         {
             Locker();
         }
@@ -55,7 +57,7 @@ public class PlayerItemPickUp : MonoBehaviour
             if (pickUpItem != null)
                 pickUpItem.timerPickUp.fillAmount = pickUpValue;
             PickUpTimer();
-            if(pickUpValue >= pickUpTime)
+            if (pickUpValue >= pickUpTime)
             {
                 GetComponentInChildren<ItemCollider>().nearItens.Remove(pickUpItem.GetComponent<Collider>());
                 pickUpItem.PickUp(PV);

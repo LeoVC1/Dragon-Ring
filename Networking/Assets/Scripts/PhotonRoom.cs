@@ -68,8 +68,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         photonPlayers = PhotonNetwork.PlayerList;
         print("Player List : " + photonPlayers.Length);
         playersInRoom = photonPlayers.Length;
-        myNumberInRoom = playersInRoom;
-        PhotonNetwork.NickName = myNumberInRoom.ToString();
+        PhotonNetwork.NickName = lobby.nickName.text;
         if (MultiplayerSettings.multiplayerSettings.delayStart)
         {
             Debug.Log("Displayer players in room out of max players possible (" + playersInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayers + ")");
@@ -165,26 +164,14 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
                     StartGame();
                 }
             }
+            else
+            {
+                if (currentScene == MultiplayerSettings.multiplayerSettings.multiplayerScene)
+                {
+                    GameSetup.GS.playersCountText.text = playersInGame.ToString();
+                }
+            }
         }
-    }
-
-    IEnumerator FadeOut()
-    {
-        lobby.waitingText.text = "Loading game...";
-        lobby.timerText.enabled = false;
-        lobby.playersCountText.enabled = false;
-        lobby.maxPlayersText.enabled = false;
-
-        float t = 0;
-        while (t <= 1)
-        {
-            Color a = lobby.fadeOut.color;
-            a.a = Mathf.Lerp(0, 1, t);
-            lobby.fadeOut.color = a;
-            t += Time.deltaTime;
-            yield return null;
-        }
-        StartGame();
     }
 
     void StartGame()
@@ -240,6 +227,12 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         {
             PV.RPC("CreatePlayer", RpcTarget.All);
         }
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        playersInGame--;
     }
 
 }

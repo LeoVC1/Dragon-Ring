@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class GameSetup : MonoBehaviour
 {
@@ -20,15 +23,91 @@ public class GameSetup : MonoBehaviour
 
     public GameObject escButtons;
 
+    //LOSER LABEL
+    public GameObject loserLabel;
+    public TextMeshProUGUI killerNickname;
+    public TextMeshProUGUI kills;
+    public TextMeshProUGUI finalKills;
+
+
+    public TextMeshProUGUI playersCountText;
     public RawImage minimapImage;
+
+    public float safeZoneRadius = 250f;
+    private float decreaseFlux = 1f;
+    public Transform safeZoneCenter;
+    private bool readyToCount;
+    private float safeZoneTimer = 30;
+    private float safeTimer = 5;
+    public int waves = 1;
+    public TextMeshProUGUI safeZoneTimerText;
+    public Transform circle;
+    Vector3 startScale;
+
+    public DragonMovement dragonMove;
+
+    bool decrease = false;
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(safeZoneCenter.position, safeZoneRadius);
+    }
 
 
     private void OnEnable()
     {
-        if(GS == null)
+        if (GS == null)
         {
             GS = this;
         }
+        startScale = circle.localScale;
+    }
+
+    private void FixedUpdate()
+    {
+        if (readyToCount)
+        {
+            if (safeZoneTimer >= 0)
+            {
+                safeZoneRadius -= decreaseFlux * Time.deltaTime;
+                circle.localScale = new Vector3(safeZoneRadius * startScale.x / 350, startScale.y, safeZoneRadius * startScale.z / 350);
+                safeZoneTimer -= Time.deltaTime;
+                dragonMove.StartMovement(circle.localScale.x >= 500 ? 1 : 2);
+            }
+            else
+            {
+                dragonMove.StopMovement();
+                safeZoneTimer = 30;
+                safeZoneTimerText.color = Color.green;
+                readyToCount = false;
+                if (decrease)
+                    if (waves > 2)
+                        waves--;
+                    else
+                        decrease = false;
+                else if (waves < 6)
+                    waves++;
+                else
+                    decrease = true;
+                decreaseFlux = waves * 1f;
+            }
+            safeZoneTimerText.text = IntToSeconds(System.Convert.ToInt32(safeZoneTimer));
+        }
+        else
+        {
+            if (safeTimer <= 0)
+            {
+                readyToCount = true;
+                safeZoneTimerText.color = Color.red;
+                safeTimer = 5;
+            }
+            else
+            {
+                safeTimer -= Time.deltaTime;
+            }
+            safeZoneTimerText.text = IntToSeconds(System.Convert.ToInt32(safeTimer));
+        }
+        
     }
 
     private void Update()
@@ -38,18 +117,41 @@ public class GameSetup : MonoBehaviour
             if (escButtons.activeSelf == false)
             {
                 Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 escButtons.SetActive(true);
             }
             else
             {
+                Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 escButtons.SetActive(false);
             }
         }
     }
 
+    public void DisconnectPlayer()
+    {
+        StartCoroutine(DisconnectAndLoad());
+    }
+
+    IEnumerator DisconnectAndLoad()
+    {
+        PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+            yield return null;
+        SceneManager.LoadScene(MultiplayerSettings.multiplayerSettings.menuScene);
+    }
+
     public void OnButtonQuit()
     {
         Application.Quit();
+    }
+
+    string IntToSeconds(int value)
+    {
+        var minutes = Mathf.FloorToInt(value / 60);
+        var seconds = value % 60;
+
+        return string.Format($"{minutes.ToString("00")}:{seconds.ToString("00")}");
     }
 }
