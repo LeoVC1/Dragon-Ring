@@ -12,6 +12,8 @@ public class AvatarCombat : MonoBehaviour
     PlayerMovement movementScript;
     HPScript HPScript;
 
+    public AudioSource aSource;
+    public AudioClip[] clips;
     public GameObject hitMarkPrefab;
     public GameObject hitParticle;
     public GameObject hitPropWood;
@@ -60,17 +62,42 @@ public class AvatarCombat : MonoBehaviour
                         Vector3 direction = hit.point - hit.collider.transform.position;
                         GameObject hitmark = Instantiate(hitMarkPrefab, hit.collider.transform.position + Vector3.up, Quaternion.identity);
                         Destroy(hitmark, 0.5f);
+                        PlaySound();
                         PV.RPC("RPC_WarriorAttack", RpcTarget.All, damage, ID, hit.collider.transform.position.x, hit.collider.transform.position.y, hit.collider.transform.position.z, PhotonNetwork.NickName, PV.ViewID);
                         _lock = true;
                     }
                     else if (hit.transform.tag == "WoodProps" || hit.transform.tag == "StoneProps")
                     {
+                        PlaySound(hit.transform.tag);
                         PV.RPC("RPC_WarriorAttackProp", RpcTarget.All, hit.point.x, hit.point.y, hit.point.z, hit.transform.tag);
                         _lock = true;
                     }
                 }
             }
         }
+    }
+
+    public void PlaySound()
+    {
+        aSource.volume = 0.6f;
+        aSource.clip = clips[2];
+        aSource.Play();
+    }
+
+    public void PlaySound(string tag)
+    {
+        switch(tag)
+        {
+            case "WoodProps":
+                aSource.volume = 0.7f;
+                aSource.clip = clips[0];
+                break;
+            case "StoneProps":
+                aSource.volume = 0.3f;
+                aSource.clip = clips[1];
+                break;
+        }
+        aSource.Play();
     }
 
     public void Kill()

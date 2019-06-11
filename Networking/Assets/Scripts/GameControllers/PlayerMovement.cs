@@ -28,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
     public Transform camT;
     Vector3 camF;
 
+    bool _lock;
+    public AudioSource passos;
+
     void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -77,7 +80,19 @@ public class PlayerMovement : MonoBehaviour
         transform.position += avatarSetup.myCharacter.transform.forward * (maxSpeed * speed * runSpeed) * Time.deltaTime;
 
         avatarSetup.animator.SetFloat("Speed", Mathf.Abs(speed));
-
+        if(Mathf.Abs(speed) != 0 && runSpeed == 2.5f)
+        {
+            if (!_lock)
+            {
+                passos.Play();
+                _lock = true;
+            }
+        }
+        else
+        {
+            _lock = false;
+            passos.Stop();
+        }
         return speed;
     }
 
