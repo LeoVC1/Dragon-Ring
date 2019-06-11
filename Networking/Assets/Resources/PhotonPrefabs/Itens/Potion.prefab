@@ -72,9 +72,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   itemType: 3
-  pickupImage: {fileID: 7663470997391662879}
-  timerPickUp: {fileID: 1274325263727430479}
-  faceCameraScript: {fileID: 6082312919258520343}
+  pickupImage: {fileID: 7676579612804202127}
+  timerPickUp: {fileID: 7676579612804199727}
+  faceCameraScript: {fileID: 7676579612804199802}
 --- !u!114 &7676579611853386087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,25 +420,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bd1386d93e0061428ce4451467c9204, type: 3}
---- !u!1 &7663470997391662879 stripped
+--- !u!1 &7676579612804202127 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 59301303825392587, guid: 1bd1386d93e0061428ce4451467c9204,
     type: 3}
   m_PrefabInstance: {fileID: 7676579612804201684}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6082312919258520343 stripped
+--- !u!114 &7676579612804199802 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4530629074894153667, guid: 1bd1386d93e0061428ce4451467c9204,
     type: 3}
   m_PrefabInstance: {fileID: 7676579612804201684}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7663470997391662879}
+  m_GameObject: {fileID: 7676579612804202127}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e5bafffb797b47d8bf00d0cfd2058ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1274325263727430479 stripped
+--- !u!114 &7676579612804199727 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8874308358907410331, guid: 1bd1386d93e0061428ce4451467c9204,
     type: 3}

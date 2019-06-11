@@ -8766,7 +8766,7 @@ MonoBehaviour:
   playersInRoom: 0
   myNumberInRoom: 0
   playersInGame: 0
-  startingTime: 30
+  startingTime: 60
   myNumber: 0
   playersAlive: 0
   winner: 0
