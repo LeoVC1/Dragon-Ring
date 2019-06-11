@@ -169,10 +169,10 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
                     lobby.fadeOut.color = a;
                     playersAlive = playersInRoom;
                     StartGame();
+                    timeToStart = startingTime;
                 }
             }
         }
-        playersAlive = playersInRoom;
         if (currentScene == MultiplayerSettings.multiplayerSettings.multiplayerScene)
         {
             Debug.Log(playersAlive);
@@ -249,6 +249,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     
     public void PlayerDied()
     {
+        Debug.Log("Morri");
         PV.RPC("Morri", RpcTarget.All);
     }
 
@@ -256,6 +257,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public void Morri()
     {
         playersAlive--;
+        Debug.Log(playersAlive);
         GameSetup.GS.playersCountText.text = playersAlive.ToString();
     }
 
