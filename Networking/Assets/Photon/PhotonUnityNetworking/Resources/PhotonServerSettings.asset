@@ -54,5 +54,6 @@ MonoBehaviour:
   - RPC_TakeDamage
   - Morri
   - StartAlive
+  - RPC_UpdateTimer
   DisableAutoOpenWizard: 1
   ShowSettings: 1

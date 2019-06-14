@@ -131,6 +131,22 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         timeToStart = startingTime;
     }
 
+    [PunRPC]
+    void RPC_UpdateTimer()
+    {
+        if (readyToStart)
+        {
+            atMaxPlayers -= Time.deltaTime;
+            lessThanMaxPlayers = atMaxPlayers;
+            timeToStart = atMaxPlayers;
+        }
+        else if (readyToCount)
+        {
+            lessThanMaxPlayers -= Time.deltaTime;
+            timeToStart = lessThanMaxPlayers;
+        }
+    }
+
     private void Update()
     {
         if (MultiplayerSettings.multiplayerSettings.delayStart)
@@ -141,16 +157,9 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             }
             if (!isGameLoaded)
             {
-                if (readyToStart)
+                if (PhotonNetwork.IsMasterClient)
                 {
-                    atMaxPlayers -= Time.deltaTime;
-                    lessThanMaxPlayers = atMaxPlayers;
-                    timeToStart = atMaxPlayers;
-                }
-                else if (readyToCount)
-                {
-                    lessThanMaxPlayers -= Time.deltaTime;
-                    timeToStart = lessThanMaxPlayers;
+                    PV.RPC("RPC_UpdateTimer", RpcTarget.AllBuffered);
                 }
                 Debug.Log("Display time to start to the players - " + timeToStart);
                 lobby.waitingText.text = "Waiting for players!";
@@ -219,7 +228,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             else
             {
                 CreatePlayer();
-                //PV.RPC("StartAlive", RpcTarget.AllBuffered);
             }
         }
     }
@@ -260,12 +268,4 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         playersAlive--;
         GameSetup.GS.playersCountText.text = playersAlive.ToString();
     }
-
-    [PunRPC]
-    public void StartAlive()
-    {
-        PhotonRoom.room.playersAlive = playersInGame;
-        GameSetup.GS.playersCountText.text = playersAlive.ToString();
-    }
-
 }

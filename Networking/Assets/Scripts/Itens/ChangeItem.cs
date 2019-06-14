@@ -28,7 +28,7 @@ public class ChangeItem : MonoBehaviour
     public int equipedItens = 0;
     private int previousEquipedItens = 0;
     public float healthPerEquip = 10;
-    public float damagePerEquip = 10;
+    public float damagePerEquip = 8;
 
     private int aux = 0;
 
@@ -39,7 +39,7 @@ public class ChangeItem : MonoBehaviour
         armorLevel = level;
 
         mySetup.myHPScript.ChangeMaxHPValue(healthPerEquip * armorLevel);
-
+        mySetup.myHPScript.ChangeHPValue(healthPerEquip * helmetLevel);
         mySetup.myInventario.armorLevel = armorLevel;
 
         //if (armorLevel == 1 && level > 1)
@@ -55,7 +55,9 @@ public class ChangeItem : MonoBehaviour
     {
         helmetLevel = level;
 
+        
         mySetup.myHPScript.ChangeMaxHPValue(healthPerEquip * helmetLevel);
+        mySetup.myHPScript.ChangeHPValue(healthPerEquip * helmetLevel);
 
         mySetup.myInventario.helmetLevel = helmetLevel;
 

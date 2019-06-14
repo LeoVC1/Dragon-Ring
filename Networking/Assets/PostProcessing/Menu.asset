@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a3bdb2cd68f901469e7cc149151eb49, type: 3}
-  m_Name: CC
+  m_Name: Menu
   m_EditorClassIdentifier: 
   debugViews:
     m_Enabled: 1
@@ -34,7 +34,7 @@ MonoBehaviour:
     m_Settings:
       method: 0
       fxaaSettings:
-        preset: 3
+        preset: 2
       taaSettings:
         jitterSpread: 0.75
         sharpen: 0.3
@@ -72,7 +72,7 @@ MonoBehaviour:
   depthOfField:
     m_Enabled: 0
     m_Settings:
-      focusDistance: 1.8
+      focusDistance: 10
       aperture: 5.6
       focalLength: 50
       useCameraFov: 0
@@ -314,9 +314,9 @@ MonoBehaviour:
     m_Enabled: 0
     m_Settings:
       colored: 1
-      intensity: 0
+      intensity: 0.5
       size: 1
-      luminanceContribution: 1
+      luminanceContribution: 0.8
   vignette:
     m_Enabled: 1
     m_Settings:
