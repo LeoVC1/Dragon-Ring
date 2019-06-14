@@ -48,11 +48,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (avatarSetup.died)
-            return;
-
         if (PV.IsMine)
         {
+            if (avatarSetup.died)
+                return;
             if (isAttacking == false && isPickingItem == false && avatarSetup.myInventario.isDrinking == false)
             {
                 RotateToForward();

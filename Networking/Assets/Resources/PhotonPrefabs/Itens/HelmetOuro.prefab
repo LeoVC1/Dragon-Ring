@@ -34,7 +34,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 40.53472, y: 43.853943, z: 45.788918}
   m_Children:
-  - {fileID: 948037313335238790}
+  - {fileID: 7149103295339074913}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -97,9 +97,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 2
   itemType: 0
-  pickupImage: {fileID: 948037313335241691}
-  timerPickUp: {fileID: 948037313335238779}
-  faceCameraScript: {fileID: 948037313335238702}
+  pickupImage: {fileID: 1007316278057323083}
+  timerPickUp: {fileID: 8507293678599740955}
+  faceCameraScript: {fileID: 3731265046663581251}
 --- !u!114 &8672538740539311483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,31 +286,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bd1386d93e0061428ce4451467c9204, type: 3}
---- !u!1 &948037313335241691 stripped
+--- !u!1 &1007316278057323083 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 59301303825392587, guid: 1bd1386d93e0061428ce4451467c9204,
     type: 3}
   m_PrefabInstance: {fileID: 948037313335241088}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &948037313335238790 stripped
+--- !u!224 &7149103295339074913 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7934970324690091233, guid: 1bd1386d93e0061428ce4451467c9204,
     type: 3}
   m_PrefabInstance: {fileID: 948037313335241088}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &948037313335238702 stripped
+--- !u!114 &3731265046663581251 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4530629074894153667, guid: 1bd1386d93e0061428ce4451467c9204,
     type: 3}
   m_PrefabInstance: {fileID: 948037313335241088}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 948037313335241691}
+  m_GameObject: {fileID: 1007316278057323083}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e5bafffb797b47d8bf00d0cfd2058ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &948037313335238779 stripped
+--- !u!114 &8507293678599740955 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8874308358907410331, guid: 1bd1386d93e0061428ce4451467c9204,
     type: 3}

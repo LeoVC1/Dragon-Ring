@@ -54,7 +54,7 @@ public class AvatarSetup : MonoBehaviour
             else
                 GameSetup.GS.DisconnectPlayer();
         }
-        if (PhotonRoom.room.winner && !locker)
+        else if (PhotonRoom.room.winner && !locker)
         {
             Win();
             locker = true;
@@ -104,6 +104,8 @@ public class AvatarSetup : MonoBehaviour
 
     public void Win()
     {
+        if (!PV.IsMine)
+            return;
         died = true;
         GameSetup.GS.loserLabel.SetActive(true);
         GameSetup.GS.killerNickname.text = "You win!";

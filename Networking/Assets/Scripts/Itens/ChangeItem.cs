@@ -36,53 +36,55 @@ public class ChangeItem : MonoBehaviour
 
     public void ChangeArmor(int level)
     {
-        if (armorLevel == 1 && level > 1)
-        {
-            GameObject item = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "PeitoralFerro"), transform.position + Vector3.up, transform.rotation);
-            Rigidbody rb = item.GetComponent<Rigidbody>();
-            if (rb != null)
-                rb.AddForce(transform.forward * 300);
-        }
-
         armorLevel = level;
 
         mySetup.myHPScript.ChangeMaxHPValue(healthPerEquip * armorLevel);
 
         mySetup.myInventario.armorLevel = armorLevel;
+
+        //if (armorLevel == 1 && level > 1)
+        //{
+        //    GameObject item = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "PeitoralFerro"), transform.position + Vector3.up, transform.rotation);
+        //    Rigidbody rb = item.GetComponent<Rigidbody>();
+        //    if (rb != null)
+        //        rb.AddForce(transform.forward * 300);
+        //}
     }
 
     public void ChangeHelmet(int level)
     {
-        if (helmetLevel == 1 && level > 1)
-        {
-            GameObject item = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "HelmetFerro"), transform.position + Vector3.up, transform.rotation);
-            Rigidbody rb = item.GetComponent<Rigidbody>();
-            if(rb != null)
-                rb.AddForce(transform.forward * 300);
-        }
-
         helmetLevel = level;
 
         mySetup.myHPScript.ChangeMaxHPValue(healthPerEquip * helmetLevel);
 
         mySetup.myInventario.helmetLevel = helmetLevel;
+
+        //if (helmetLevel == 1 && level > 1)
+        //{
+        //    GameObject item = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "HelmetFerro"), transform.position + Vector3.up, transform.rotation);
+        //    Rigidbody rb = item.GetComponent<Rigidbody>();
+        //    if (rb != null)
+        //        rb.AddForce(transform.forward * 300);
+        //}
+
     }
 
     public void ChangeWeapon(int level)
     {
-        if (weaponLevel == 1 && level > 1)
-        {
-            GameObject item = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "WeaponFerro"), transform.position + Vector3.up, transform.rotation);
-            Rigidbody rb = item.GetComponent<Rigidbody>();
-            if (rb != null)
-                rb.AddForce(transform.forward * 300);
-        }
-
         weaponLevel = level;
 
         mySetup.myAvatarCombat.ChangeDamage(damagePerEquip * weaponLevel);
 
         mySetup.myInventario.weaponLevel = weaponLevel;
+
+        //if (weaponLevel == 1 && level > 1)
+        //{
+        //    GameObject item = PhotonNetwork.InstantiateSceneObject(Path.Combine("PhotonPrefabs", "Itens", "WeaponFerro"), transform.position + Vector3.up, transform.rotation);
+        //    Rigidbody rb = item.GetComponent<Rigidbody>();
+        //    if (rb != null)
+        //        rb.AddForce(transform.forward * 300);
+        //}
+
     }
 
     public void ShowPotion()
